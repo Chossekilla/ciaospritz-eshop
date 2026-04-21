@@ -1900,3 +1900,311 @@ select.form-control { cursor: pointer; }
         height: 64px !important;
     }
 }
+
+/* ==================== RESPONZIVITA - KOMPLETNÍ ==================== */
+
+/* ---- KONTAKT ---- */
+@media (max-width: 768px) {
+    /* Kontakt grid → 1 sloupec */
+    .kontakt-grid,
+    [style*="grid-template-columns:1fr 1fr"] {
+        grid-template-columns: 1fr !important;
+        gap: 32px !important;
+    }
+
+    /* Kontaktní info boxy */
+    [style*="display:flex;gap:16px;align-items:flex-start;margin-bottom"] {
+        flex-direction: column !important;
+        gap: 8px !important;
+    }
+}
+
+/* ---- STÁNEK / PŮJČENÍ ---- */
+@media (max-width: 768px) {
+    /* Stánek layout grid */
+    .stanek-layout,
+    [style*="grid-template-columns:1fr 360px"],
+    [style*="grid-template-columns: 1fr 360px"] {
+        grid-template-columns: 1fr !important;
+        gap: 32px !important;
+    }
+
+    /* Stánek features grid */
+    [style*="grid-template-columns:repeat(2,1fr)"],
+    [style*="grid-template-columns: repeat(2, 1fr)"] {
+        grid-template-columns: 1fr !important;
+    }
+
+    /* Stánek formulář sticky → static */
+    [style*="position:sticky"],
+    [style*="position: sticky"] {
+        position: static !important;
+    }
+
+    /* Stánek obrázek */
+    [style*="border-radius:16px;overflow:hidden;margin-bottom:32px"] img {
+        border-radius: 12px !important;
+    }
+
+    /* Datum picker */
+    [style*="grid-template-columns:1fr 1fr;gap:12px"] {
+        grid-template-columns: 1fr !important;
+    }
+}
+
+/* ---- KOŠÍK ---- */
+@media (max-width: 768px) {
+    .cart-table thead { display: none; }
+    .cart-table tbody tr {
+        display: grid;
+        grid-template-columns: 80px 1fr;
+        gap: 8px;
+        padding: 16px 0;
+        border-bottom: 1px solid var(--border);
+        position: relative;
+    }
+    .cart-table td { padding: 2px 0 !important; border: none !important; }
+    .cart-table td:first-child { grid-row: 1 / 4; }
+    .cart-table td:last-child {
+        position: absolute;
+        top: 16px;
+        right: 0;
+    }
+
+    /* Košík souhrn */
+    [style*="display:flex;justify-content:flex-end"] {
+        justify-content: stretch !important;
+    }
+    [style*="min-width:320px"] {
+        min-width: unset !important;
+        width: 100% !important;
+    }
+}
+
+/* ---- POKLADNA ---- */
+@media (max-width: 768px) {
+    /* Pokladna grid */
+    [style*="grid-template-columns:1fr 380px"],
+    [style*="grid-template-columns: 1fr 380px"] {
+        grid-template-columns: 1fr !important;
+        gap: 24px !important;
+    }
+
+    /* Doprava / platba grid */
+    [style*="display:grid;grid-template-columns:1fr 1fr;gap:8px"] {
+        grid-template-columns: 1fr !important;
+    }
+}
+
+/* ---- HEADER NAVIGACE ---- */
+@media (max-width: 768px) {
+    .nav { display: none; }
+    .nav.open { display: flex; flex-direction: column; position: fixed; inset: 0; background: #111; z-index: 999; padding: 80px 32px 32px; gap: 8px; }
+    .nav.open a { font-size: 1.3rem; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.08); color: white; }
+    .hamburger { display: flex !important; }
+
+    /* Logo menší */
+    .logo { font-size: 1.3rem !important; }
+
+    /* Header icons */
+    .header-actions { gap: 8px !important; }
+    .lang-switch { display: none; }
+}
+
+/* ---- HERO ---- */
+@media (max-width: 768px) {
+    section[style*="90vh"] {
+        height: 75vh !important;
+        min-height: 480px !important;
+    }
+
+    /* Hero text větší padding */
+    section[style*="90vh"] .container {
+        padding: 0 20px !important;
+    }
+
+    /* Hero tlačítka pod sebou */
+    section[style*="90vh"] [style*="display:flex;gap:12px"] {
+        flex-direction: column !important;
+        gap: 10px !important;
+    }
+
+    /* Hero stats menší */
+    section[style*="90vh"] [style*="display:flex;gap:32px"] {
+        gap: 20px !important;
+    }
+}
+
+/* ---- PRODUKTY GRID ---- */
+@media (max-width: 640px) {
+    .products-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 12px !important;
+    }
+    .product-card { border-radius: 10px !important; }
+    .product-card img { height: 160px !important; }
+}
+@media (max-width: 380px) {
+    .products-grid {
+        grid-template-columns: 1fr !important;
+    }
+}
+
+/* ---- PRODUKT DETAIL ---- */
+@media (max-width: 768px) {
+    .product-detail-grid {
+        grid-template-columns: 1fr !important;
+        gap: 24px !important;
+    }
+    .product-gallery { order: 1; }
+    .product-info { order: 2; }
+}
+
+/* ---- SEKCE / CARDY ---- */
+@media (max-width: 768px) {
+    .section { padding: 40px 0 !important; }
+    .section-title { font-size: 1.6rem !important; }
+    .card { border-radius: 10px !important; }
+
+    /* Featured grid */
+    .featured-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 12px !important;
+    }
+
+    /* Novinky grid */
+    .articles-grid {
+        grid-template-columns: 1fr !important;
+        gap: 16px !important;
+    }
+}
+
+/* ---- GALERIE ---- */
+@media (max-width: 768px) {
+    .gallery-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 8px !important;
+    }
+    .albums-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 12px !important;
+    }
+}
+
+/* ---- FOOTER ---- */
+@media (max-width: 768px) {
+    .footer-grid {
+        grid-template-columns: 1fr !important;
+        gap: 32px !important;
+        text-align: center !important;
+    }
+    .footer-social { justify-content: center !important; }
+}
+
+/* ---- OBECNÉ UTILITY ---- */
+@media (max-width: 768px) {
+    .container { padding: 0 16px !important; }
+    .btn-lg { padding: 12px 24px !important; font-size: 15px !important; }
+
+    /* Skryj nepodstatné věci na mobilu */
+    .hide-mobile { display: none !important; }
+
+    /* Tabulky scroll */
+    .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    table { min-width: 500px; }
+}
+
+/* ---- HAMBURGER TLAČÍTKO ---- */
+.hamburger {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    flex-direction: column;
+    gap: 5px;
+}
+.hamburger span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--black);
+    border-radius: 2px;
+    transition: all 0.3s;
+}
+.hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+/* ---- KONTAKT GRID ---- */
+.kontakt-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: start;
+}
+@media (max-width: 768px) {
+    .kontakt-grid {
+        grid-template-columns: 1fr !important;
+        gap: 32px !important;
+    }
+}
+
+/* ---- STÁNEK GRID ---- */
+.stanek-grid {
+    display: grid;
+    grid-template-columns: 1fr 360px;
+    gap: 48px;
+    align-items: start;
+}
+@media (max-width: 900px) {
+    .stanek-grid {
+        grid-template-columns: 1fr !important;
+        gap: 32px !important;
+    }
+    .stanek-grid [style*="position:sticky"],
+    .stanek-grid [style*="position: sticky"] {
+        position: static !important;
+    }
+}
+
+/* ---- HAMBURGER OPEN NAV ---- */
+@media (max-width: 768px) {
+    #nav.open {
+        display: flex !important;
+        flex-direction: column;
+        position: fixed;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background: rgba(17,17,17,0.98);
+        z-index: 999;
+        padding: 80px 32px 32px;
+        gap: 4px;
+        overflow-y: auto;
+    }
+    #nav.open a {
+        font-size: 1.2rem !important;
+        padding: 14px 0 !important;
+        border-bottom: 1px solid rgba(255,255,255,0.08) !important;
+        color: white !important;
+        font-weight: 500;
+    }
+    #nav.open a.active {
+        color: #E8631A !important;
+    }
+    .hamburger {
+        display: flex !important;
+        z-index: 1000;
+        position: relative;
+    }
+    .hamburger.active span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+        background: white;
+    }
+    .hamburger.active span:nth-child(2) {
+        opacity: 0;
+    }
+    .hamburger.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(5px, -5px);
+        background: white;
+    }
+}

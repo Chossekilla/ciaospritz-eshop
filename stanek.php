@@ -126,7 +126,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
         <?php else: ?>
 
-        <div class="stanek-form-grid" class="stanek-layout" style="display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start">
+        <div class="stanek-grid">
 
             <!-- KALENDÁŘ -->
             <div>

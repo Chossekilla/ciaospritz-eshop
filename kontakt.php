@@ -40,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <section class="section">
     <div class="container">
-        <div class="kontakt-grid" class="contact-layout" style="display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start">
+        <div class="kontakt-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start">
 
             <!-- KONTAKTNÍ INFO -->
             <div>
