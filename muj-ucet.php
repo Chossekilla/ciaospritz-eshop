@@ -298,6 +298,7 @@ $navItems = [
                     <div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap">
                         <span style="font-size:12px;padding:4px 10px;background:var(--gray-light);border-radius:4px">🚚 <?= $o['shipping_method']==='osobni' ? t('Osobní odběr','Pickup') : t('Kurýr','Courier') ?></span>
                         <span style="font-size:12px;padding:4px 10px;background:var(--gray-light);border-radius:4px">💳 <?= e($o['payment_method']) ?></span>
+                        <a href="<?= BASE_URL ?>/faktura-zakaznik.php?order=<?= e($o['order_number']) ?>" target="_blank" style="font-size:12px;padding:4px 10px;background:rgba(45,122,58,0.1);color:var(--green);border-radius:4px;font-weight:600;text-decoration:none">🧾 <?= t('Faktura','Invoice') ?></a>
                     </div>
                 </div>
             </div>
