@@ -1,0 +1,1902 @@
+/* CIAO SPRITZ - Hlavní stylesheet */
+/* Barvy: bílá, černá, oranžová, zelená tlačítka */
+
+:root {
+    --white: #ffffff;
+    --black: #111111;
+    --orange: #E8631A;
+    --orange-light: #f07d35;
+    --orange-dark: #c4521a;
+    --green: #2D7A3A;
+    --green-light: #38973f;
+    --gray-light: #f5f5f5;
+    --gray: #888888;
+    --gray-dark: #444444;
+    --border: #e0e0e0;
+
+    --font-display: 'Playfair Display', Georgia, serif;
+    --font-body: 'DM Sans', sans-serif;
+
+    --radius: 8px;
+    --radius-lg: 16px;
+    --shadow: 0 4px 20px rgba(0,0,0,0.08);
+    --shadow-hover: 0 8px 32px rgba(0,0,0,0.15);
+    --transition: 0.3s ease;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+    font-family: var(--font-body);
+    color: var(--black);
+    background: var(--white);
+    line-height: 1.6;
+    font-size: 16px;
+}
+
+img { max-width: 100%; height: auto; display: block; }
+a { color: inherit; text-decoration: none; }
+ul { list-style: none; }
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+/* ==================== TOP BAR ==================== */
+.topbar {
+    background: var(--black);
+    color: var(--white);
+    font-size: 13px;
+    padding: 8px 0;
+}
+
+.topbar .container {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.topbar a { color: var(--white); opacity: 0.85; transition: opacity var(--transition); }
+.topbar a:hover { opacity: 1; }
+
+.lang-switch {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.lang-switch a { opacity: 0.6; font-weight: 500; letter-spacing: 0.05em; }
+.lang-switch a.active { opacity: 1; color: var(--orange); }
+
+/* ==================== HEADER ==================== */
+.header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+    transition: box-shadow var(--transition);
+}
+
+.header.scrolled { box-shadow: var(--shadow); }
+
+.header .container {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    height: 72px;
+}
+
+.logo img { height: 48px; width: auto; }
+.logo-text {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 900;
+    letter-spacing: 0.05em;
+    color: var(--black);
+}
+.logo-text span { color: var(--orange); }
+
+.nav {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-left: auto;
+}
+
+.nav a {
+    font-size: 14px;
+    font-weight: 500;
+    padding: 8px 12px;
+    border-radius: var(--radius);
+    color: var(--gray-dark);
+    transition: color var(--transition), background var(--transition);
+    white-space: nowrap;
+}
+
+.nav a:hover, .nav a.active {
+    color: var(--orange);
+    background: rgba(232, 99, 26, 0.07);
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.cart-btn {
+    position: relative;
+    font-size: 1.3rem;
+    padding: 8px;
+    cursor: pointer;
+    transition: transform var(--transition);
+}
+.cart-btn:hover { transform: scale(1.1); }
+
+.cart-badge {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: var(--orange);
+    color: white;
+    font-size: 10px;
+    font-weight: 700;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-icon { font-size: 1.3rem; padding: 8px; transition: transform var(--transition); }
+.btn-icon:hover { transform: scale(1.1); }
+
+.hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+}
+.hamburger span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--black);
+    transition: var(--transition);
+}
+
+/* ==================== BUTTONS ==================== */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 14px 28px;
+    border-radius: var(--radius);
+    font-family: var(--font-body);
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--transition);
+    border: 2px solid transparent;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.btn-primary {
+    background: var(--green);
+    color: var(--white);
+    border-color: var(--green);
+}
+.btn-primary:hover {
+    background: var(--green-light);
+    border-color: var(--green-light);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(45, 122, 58, 0.35);
+}
+
+.btn-secondary {
+    background: transparent;
+    color: var(--orange);
+    border-color: var(--orange);
+}
+.btn-secondary:hover {
+    background: var(--orange);
+    color: var(--white);
+    transform: translateY(-2px);
+}
+
+.btn-dark {
+    background: var(--black);
+    color: var(--white);
+    border-color: var(--black);
+}
+.btn-dark:hover {
+    background: var(--gray-dark);
+    transform: translateY(-2px);
+}
+
+.btn-sm { padding: 10px 20px; font-size: 13px; }
+.btn-lg { padding: 18px 40px; font-size: 17px; }
+
+/* ==================== HERO ==================== */
+.hero {
+    min-height: 90vh;
+    display: flex;
+    align-items: center;
+    background: linear-gradient(135deg, #fff8f4 0%, #fff 50%, #f0f8f1 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -10%;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(232,99,26,0.08) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.hero::after {
+    content: '';
+    position: absolute;
+    bottom: -20%;
+    left: -5%;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(45,122,58,0.06) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.hero .container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+    padding-top: 60px;
+    padding-bottom: 60px;
+}
+
+.hero-content { }
+
+.hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(232,99,26,0.1);
+    color: var(--orange);
+    padding: 6px 16px;
+    border-radius: 50px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+}
+
+.hero-title {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: 24px;
+    color: var(--black);
+}
+
+.hero-title .accent { color: var(--orange); font-style: italic; }
+
+.hero-desc {
+    font-size: 1.1rem;
+    color: var(--gray-dark);
+    margin-bottom: 40px;
+    max-width: 480px;
+    line-height: 1.7;
+}
+
+.hero-actions {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.hero-stats {
+    display: flex;
+    gap: 32px;
+    margin-top: 48px;
+    padding-top: 32px;
+    border-top: 1px solid var(--border);
+}
+
+.hero-stat-num {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    font-weight: 900;
+    color: var(--orange);
+}
+
+.hero-stat-label {
+    font-size: 13px;
+    color: var(--gray);
+    margin-top: 2px;
+}
+
+.hero-visual {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero-img-main {
+    width: 100%;
+    max-width: 420px;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-hover);
+    animation: float 4s ease-in-out infinite;
+}
+
+.hero-img-badge {
+    position: absolute;
+    bottom: 32px;
+    left: -20px;
+    background: var(--white);
+    border-radius: var(--radius);
+    padding: 16px 20px;
+    box-shadow: var(--shadow-hover);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.hero-img-badge .icon { font-size: 1.8rem; }
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+}
+
+/* ==================== SECTIONS ==================== */
+.section { padding: 80px 0; }
+.section-sm { padding: 48px 0; }
+.section-lg { padding: 120px 0; }
+.section-gray { background: var(--gray-light); }
+
+.section-header {
+    text-align: center;
+    margin-bottom: 56px;
+}
+
+.section-label {
+    display: inline-block;
+    color: var(--orange);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+}
+
+.section-title {
+    font-family: var(--font-display);
+    font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+    font-weight: 900;
+    color: var(--black);
+    line-height: 1.2;
+}
+
+.section-title .accent { color: var(--orange); font-style: italic; }
+
+.section-desc {
+    font-size: 1.05rem;
+    color: var(--gray);
+    margin-top: 16px;
+    max-width: 560px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* ==================== PRODUCT CARDS ==================== */
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 28px;
+}
+
+.product-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    transition: all var(--transition);
+    cursor: pointer;
+}
+
+.product-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-hover);
+    border-color: var(--orange);
+}
+
+.product-img {
+    aspect-ratio: 4/3;
+    overflow: hidden;
+    background: var(--gray-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.product-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.product-card:hover .product-img img { transform: scale(1.05); }
+
+.product-img-placeholder {
+    font-size: 4rem;
+    opacity: 0.3;
+}
+
+.product-info { padding: 20px; }
+
+.product-category {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 6px;
+}
+
+.product-name {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+    line-height: 1.3;
+}
+
+.product-desc {
+    font-size: 13px;
+    color: var(--gray);
+    margin-bottom: 16px;
+    line-height: 1.5;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.product-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.product-price {
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    font-weight: 900;
+    color: var(--black);
+}
+
+/* ==================== CATEGORY FILTER ==================== */
+.category-filter {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+}
+
+.filter-btn {
+    padding: 10px 24px;
+    border: 2px solid var(--border);
+    border-radius: 50px;
+    background: none;
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all var(--transition);
+    color: var(--gray-dark);
+}
+
+.filter-btn:hover, .filter-btn.active {
+    border-color: var(--orange);
+    background: var(--orange);
+    color: var(--white);
+}
+
+/* ==================== BENEFITS ==================== */
+.benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 32px;
+}
+
+.benefit-card {
+    text-align: center;
+    padding: 32px 24px;
+    border-radius: var(--radius-lg);
+    background: var(--white);
+    border: 1px solid var(--border);
+    transition: all var(--transition);
+}
+
+.benefit-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow);
+    border-color: var(--orange);
+}
+
+.benefit-icon {
+    font-size: 2.5rem;
+    margin-bottom: 16px;
+}
+
+.benefit-title {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.benefit-desc {
+    font-size: 14px;
+    color: var(--gray);
+    line-height: 1.6;
+}
+
+/* ==================== ARTICLES ==================== */
+.articles-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 32px;
+}
+
+.article-card {
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    border: 1px solid var(--border);
+    transition: all var(--transition);
+    background: var(--white);
+}
+
+.article-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-hover);
+}
+
+.article-img {
+    aspect-ratio: 16/9;
+    overflow: hidden;
+    background: linear-gradient(135deg, rgba(232,99,26,0.1), rgba(45,122,58,0.1));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.article-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s;
+}
+
+.article-card:hover .article-img img { transform: scale(1.05); }
+
+.article-img-placeholder { font-size: 3rem; opacity: 0.3; }
+
+.article-body { padding: 24px; }
+
+.article-date {
+    font-size: 12px;
+    color: var(--gray);
+    margin-bottom: 8px;
+}
+
+.article-title {
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    line-height: 1.3;
+}
+
+.article-perex {
+    font-size: 14px;
+    color: var(--gray-dark);
+    line-height: 1.6;
+    margin-bottom: 20px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* ==================== BANNER SEKCE ==================== */
+.banner-section {
+    background: linear-gradient(135deg, var(--orange) 0%, var(--orange-dark) 100%);
+    color: var(--white);
+    text-align: center;
+    padding: 80px 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.banner-section::before {
+    content: '🍊';
+    position: absolute;
+    font-size: 200px;
+    opacity: 0.05;
+    top: -40px;
+    right: -40px;
+}
+
+.banner-section .section-title { color: var(--white); }
+
+.banner-section .section-desc { color: rgba(255,255,255,0.85); }
+
+/* ==================== FORMS ==================== */
+.form-group { margin-bottom: 20px; }
+
+.form-label {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 6px;
+    color: var(--gray-dark);
+}
+
+.form-control {
+    width: 100%;
+    padding: 12px 16px;
+    border: 2px solid var(--border);
+    border-radius: var(--radius);
+    font-family: var(--font-body);
+    font-size: 15px;
+    color: var(--black);
+    background: var(--white);
+    transition: border-color var(--transition);
+    outline: none;
+}
+
+.form-control:focus { border-color: var(--orange); }
+
+textarea.form-control { resize: vertical; min-height: 120px; }
+
+select.form-control { cursor: pointer; }
+
+/* ==================== CART ==================== */
+.cart-table { width: 100%; border-collapse: collapse; }
+
+.cart-table th {
+    text-align: left;
+    padding: 12px 16px;
+    border-bottom: 2px solid var(--border);
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--gray);
+}
+
+.cart-table td {
+    padding: 16px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: middle;
+}
+
+.cart-qty {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.qty-btn {
+    width: 32px;
+    height: 32px;
+    border: 2px solid var(--border);
+    border-radius: 50%;
+    background: none;
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--transition);
+}
+
+.qty-btn:hover { border-color: var(--orange); color: var(--orange); }
+
+.cart-summary {
+    background: var(--gray-light);
+    border-radius: var(--radius-lg);
+    padding: 32px;
+}
+
+.cart-total-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+}
+
+.cart-total-row:last-child {
+    border-bottom: none;
+    font-size: 1.2rem;
+    font-weight: 700;
+    padding-top: 16px;
+}
+
+.free-shipping-bar {
+    background: rgba(45,122,58,0.1);
+    border-radius: var(--radius);
+    padding: 12px 16px;
+    font-size: 13px;
+    color: var(--green);
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+
+/* ==================== ALERTS ==================== */
+.alert {
+    padding: 14px 20px;
+    border-radius: var(--radius);
+    font-size: 14px;
+    margin-bottom: 16px;
+}
+
+.alert-success { background: rgba(45,122,58,0.1); color: var(--green); border: 1px solid rgba(45,122,58,0.2); }
+.alert-error { background: rgba(220,53,69,0.1); color: #dc3545; border: 1px solid rgba(220,53,69,0.2); }
+.alert-info { background: rgba(232,99,26,0.1); color: var(--orange); border: 1px solid rgba(232,99,26,0.2); }
+
+/* ==================== RESPONSIVE ==================== */
+
+/* TABLET - 1024px */
+@media (max-width: 1024px) {
+    .hero .container {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 40px;
+        padding-top: 40px;
+        padding-bottom: 40px;
+    }
+    .hero-desc { margin: 0 auto 40px; }
+    .hero-actions { justify-content: center; }
+    .hero-stats { justify-content: center; }
+    .hero-visual { display: none; }
+
+    /* Košík */
+    .kosik-grid { grid-template-columns: 1fr !important; }
+
+    /* Pokladna */
+    .pokladna-grid { grid-template-columns: 1fr !important; }
+    .pokladna-grid .sticky-summary { position: static !important; }
+
+    /* Můj účet */
+    .account-grid { grid-template-columns: 1fr !important; }
+    .account-sidebar { display: flex; flex-wrap: wrap; gap: 12px; }
+    .account-sidebar nav { display: flex; flex-wrap: wrap; }
+    .account-sidebar nav a { border-radius: var(--radius); border: 1px solid var(--border); }
+
+    /* Kontakt */
+    .kontakt-grid { grid-template-columns: 1fr !important; }
+
+    /* Produkt detail */
+    .produkt-grid { grid-template-columns: 1fr !important; }
+
+    /* Stánek */
+    .stanek-form-grid { grid-template-columns: 1fr !important; }
+
+    /* Footer */
+    .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+}
+
+/* MOBIL - 768px */
+@media (max-width: 768px) {
+
+    /* NAVIGACE - mobilní menu */
+    .nav {
+        display: none;
+        position: fixed;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background: var(--white);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+        z-index: 200;
+        padding: 20px;
+    }
+    .nav.open { display: flex; }
+    .nav a {
+        font-size: 1.1rem;
+        padding: 12px 24px;
+        width: 100%;
+        text-align: center;
+        border-radius: var(--radius);
+    }
+    .nav a:hover, .nav a.active {
+        background: rgba(232,99,26,0.08);
+        color: var(--orange);
+    }
+    .hamburger { display: flex; z-index: 300; }
+
+    /* Topbar zjednodušení */
+    .topbar .container { gap: 12px; font-size: 12px; }
+
+    /* Sekce menší padding */
+    .section { padding: 48px 0; }
+    .section-lg { padding: 64px 0; }
+
+    /* Hero */
+    .hero { min-height: auto; padding: 40px 0; }
+    .hero-badge { font-size: 11px; }
+    .hero-actions { flex-direction: column; align-items: center; }
+    .hero-actions .btn { width: 100%; max-width: 320px; justify-content: center; }
+    .hero-stats { flex-wrap: wrap; gap: 20px; justify-content: center; }
+
+    /* Produkty - 2 sloupce na mobilu */
+    .products-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .product-info { padding: 12px; }
+    .product-name { font-size: 0.95rem; }
+    .product-price { font-size: 1.1rem; }
+    .product-footer { flex-direction: column; gap: 8px; align-items: flex-start; }
+    .product-footer .btn { width: 100%; justify-content: center; }
+
+    /* Články - 1 sloupec */
+    .articles-grid { grid-template-columns: 1fr; }
+
+    /* Benefity - 2 sloupce */
+    .benefits-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .benefit-card { padding: 20px 16px; }
+
+    /* Košík tabulka - zjednodušit */
+    .cart-table thead { display: none; }
+    .cart-table tr {
+        display: flex;
+        flex-direction: column;
+        padding: 16px;
+        border-bottom: 1px solid var(--border);
+        gap: 8px;
+    }
+    .cart-table td {
+        padding: 0;
+        border: none;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    .cart-table td:first-child { font-weight: 600; }
+
+    /* Pokladna - grid na 1 sloupec */
+    .address-grid { grid-template-columns: 1fr !important; }
+
+    /* Section header */
+    .section-header { margin-bottom: 32px; }
+    .section-title { font-size: clamp(1.5rem, 5vw, 2.2rem); }
+
+    /* Banner sekce */
+    .banner-section { padding: 48px 0; }
+    .banner-section .section-title { font-size: 1.8rem; }
+
+    /* Footer */
+    .footer { padding: 40px 0 0; }
+    .footer-grid { grid-template-columns: 1fr; gap: 24px; }
+
+    /* Page hero */
+    .page-hero { padding: 40px 0 24px; }
+
+    /* Galerie */
+    .gallery-albums { grid-template-columns: repeat(2, 1fr) !important; }
+
+    /* Filtr tlačítka - scroll horizontálně */
+    .category-filter { flex-wrap: nowrap; overflow-x: auto; padding-bottom: 8px; -webkit-overflow-scrolling: touch; }
+    .category-filter::-webkit-scrollbar { height: 3px; }
+    .category-filter::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+    .filter-btn { flex-shrink: 0; }
+}
+
+/* MALÝ MOBIL - 480px */
+@media (max-width: 480px) {
+    .container { padding: 0 14px; }
+
+    /* Topbar - skrýt email */
+    .topbar .email-link { display: none; }
+
+    /* Hero */
+    .hero-stats { flex-direction: column; gap: 12px; align-items: center; }
+    .hero-stat-num { font-size: 1.5rem; }
+
+    /* Produkty - stále 2 sloupce ale užší */
+    .products-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+    .product-img { aspect-ratio: 1; }
+    .product-img-placeholder { font-size: 2.5rem; }
+
+    /* Benefity - 1 sloupec */
+    .benefits-grid { grid-template-columns: 1fr; }
+
+    /* Footer */
+    .footer-grid { grid-template-columns: 1fr; }
+
+    /* Tlačítka */
+    .btn { padding: 12px 20px; font-size: 14px; }
+    .btn-lg { padding: 14px 24px; font-size: 15px; }
+
+    /* Košík souhrn */
+    .cart-summary { padding: 20px; }
+
+    /* Účet - navigace jako horizontální scroll */
+    .account-grid { grid-template-columns: 1fr !important; }
+
+    /* Pokladna - zip pole */
+    .checkout-city-zip { grid-template-columns: 1fr !important; }
+
+    /* Kategorie filter */
+    .category-filter { gap: 8px; }
+    .filter-btn { padding: 8px 16px; font-size: 13px; }
+
+    /* Headery */
+    .header .container { height: 60px; gap: 16px; }
+    .logo img { height: 40px; }
+    .logo-text { font-size: 1.2rem; }
+
+    /* Stats v účtu */
+    .account-stats { grid-template-columns: 1fr !important; }
+}
+
+/* ==================== FOOTER ==================== */
+.footer {
+    background: var(--black);
+    color: var(--white);
+    padding: 64px 0 0;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 48px;
+    padding-bottom: 48px;
+}
+
+.footer-brand p {
+    font-size: 14px;
+    color: rgba(255,255,255,0.6);
+    margin: 16px 0 24px;
+    line-height: 1.6;
+}
+
+.footer .logo-text { color: var(--white); }
+.footer .logo-text span { color: var(--orange); }
+
+.social-links { display: flex; gap: 16px; }
+
+.social-links a {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+    transition: background var(--transition);
+}
+
+.social-links a:hover { background: var(--orange); }
+
+.footer-col h4 {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 16px;
+}
+
+.footer-col ul { display: flex; flex-direction: column; gap: 10px; }
+
+.footer-col ul li a {
+    font-size: 14px;
+    color: rgba(255,255,255,0.75);
+    transition: color var(--transition);
+}
+
+.footer-col ul li a:hover { color: var(--orange); }
+
+.payment-icons { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
+
+.payment-badge {
+    background: rgba(255,255,255,0.1);
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    color: rgba(255,255,255,0.75);
+}
+
+.footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding: 20px 0;
+    text-align: center;
+    font-size: 13px;
+    color: rgba(255,255,255,0.4);
+}
+
+/* ==================== PAGE HERO ==================== */
+.page-hero {
+    background: linear-gradient(135deg, #fff8f4, #fff);
+    padding: 60px 0 40px;
+    border-bottom: 1px solid var(--border);
+}
+
+.page-hero h1 {
+    font-family: var(--font-display);
+    font-size: clamp(1.8rem, 4vw, 3rem);
+    font-weight: 900;
+}
+
+.page-hero h1 .accent { color: var(--orange); font-style: italic; }
+
+.breadcrumb {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    font-size: 13px;
+    color: var(--gray);
+    margin-bottom: 12px;
+}
+
+.breadcrumb a { color: var(--orange); }
+.breadcrumb span { color: var(--gray); }
+
+/* ==================== ADMIN RESPONSIVE ==================== */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: fixed;
+        bottom: 0;
+        top: auto;
+        flex-direction: row;
+        overflow-x: auto;
+        overflow-y: hidden;
+        z-index: 100;
+        padding: 0;
+    }
+    .sidebar-logo, .sidebar-user, .sidebar-footer { display: none; }
+    .sidebar nav {
+        display: flex;
+        flex-direction: row;
+        padding: 0;
+        width: 100%;
+        overflow-x: auto;
+    }
+    .nav-section { display: none; }
+    .sidebar nav a {
+        flex-direction: column;
+        gap: 2px;
+        padding: 8px 12px;
+        font-size: 10px;
+        border-radius: 0;
+        white-space: nowrap;
+        flex-shrink: 0;
+    }
+    .main { margin-left: 0; margin-bottom: 64px; }
+    .topbar { padding: 12px 16px; }
+    .content { padding: 16px; }
+    .stats-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 12px; }
+    table { font-size: 12px; }
+    th, td { padding: 8px 12px; }
+}
+
+/* ==================== KOMPLETNÍ MOBILNÍ VYLEPŠENÍ ==================== */
+
+/* TABLET 768-1024px */
+@media (max-width: 1024px) {
+
+    /* Košík - stack vertikálně */
+    .cart-layout { grid-template-columns: 1fr !important; }
+
+    /* Pokladna - stack vertikálně */
+    .checkout-layout { grid-template-columns: 1fr !important; }
+    .checkout-summary { position: static !important; }
+
+    /* Produkt detail - stack */
+    .product-detail-grid { grid-template-columns: 1fr !important; }
+
+    /* Můj účet - sidebar nahoře */
+    .account-layout { grid-template-columns: 1fr !important; }
+    .account-sidebar { display: flex; flex-direction: row; overflow-x: auto; gap: 8px; padding: 12px; }
+    .account-sidebar .nav-link { white-space: nowrap; flex-shrink: 0; }
+
+    /* Kontakt - stack */
+    .contact-layout { grid-template-columns: 1fr !important; }
+
+    /* Stánek - stack */
+    .stanek-layout { grid-template-columns: 1fr !important; }
+
+    /* Hero stats */
+    .hero-stats { gap: 20px; }
+
+    /* Footer */
+    .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+}
+
+/* MOBIL 768px */
+@media (max-width: 768px) {
+
+    /* === OBECNÉ === */
+    .section { padding: 48px 0; }
+    .section-lg { padding: 64px 0; }
+    .container { padding: 0 16px; }
+
+    /* === HEADER === */
+    .topbar { padding: 6px 16px; font-size: 12px; }
+    .topbar span:first-child { display: none; } /* skryj telefon na malém mobilu */
+    .header .container { height: 60px; padding: 0 16px; gap: 12px; }
+    .logo img { height: 40px; }
+    .logo-text { font-size: 1.2rem; }
+
+    /* Nav overlay na mobilu */
+    .nav {
+        display: none;
+        position: fixed;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background: rgba(0,0,0,0.95);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+        z-index: 999;
+        padding: 20px;
+    }
+    .nav.open { display: flex; }
+    .nav a {
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: white !important;
+        padding: 12px 24px;
+        border-radius: 12px;
+        width: 100%;
+        text-align: center;
+    }
+    .nav a:hover, .nav a.active {
+        background: rgba(232,99,26,0.2);
+        color: var(--orange) !important;
+    }
+    .hamburger { display: flex; z-index: 1000; }
+    .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+    .hamburger.active span:nth-child(2) { opacity: 0; }
+    .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+    /* === HERO === */
+    .hero { min-height: 70vh; padding: 20px 0; }
+    .hero .container { grid-template-columns: 1fr; text-align: center; padding: 40px 16px; gap: 32px; }
+    .hero-visual { display: none; }
+    .hero-content { }
+    .hero-title { font-size: 2.2rem; }
+    .hero-desc { font-size: 1rem; margin: 0 auto 28px; max-width: 100%; }
+    .hero-actions { justify-content: center; gap: 12px; }
+    .hero-actions .btn { flex: 1; max-width: 180px; }
+    .hero-stats { justify-content: center; gap: 24px; padding-top: 20px; }
+    .hero-badge { font-size: 12px; }
+
+    /* === PRODUKTY === */
+    .products-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .product-info { padding: 14px; }
+    .product-name { font-size: 0.95rem; }
+    .product-desc { display: none; } /* skryj popis na mobilu */
+    .product-footer { flex-direction: column; gap: 8px; align-items: stretch; }
+    .product-footer .btn { width: 100%; justify-content: center; }
+    .product-price { font-size: 1.1rem; }
+
+    /* Filtr */
+    .category-filter { gap: 8px; flex-wrap: nowrap; overflow-x: auto; padding-bottom: 8px; -webkit-overflow-scrolling: touch; }
+    .filter-btn { flex-shrink: 0; padding: 8px 16px; font-size: 13px; }
+
+    /* === PRODUKT DETAIL === */
+    .product-detail-benefits { grid-template-columns: 1fr 1fr !important; }
+
+    /* === KOŠÍK === */
+    .cart-layout { grid-template-columns: 1fr !important; }
+    .cart-table { font-size: 13px; }
+    .cart-table th:nth-child(2),
+    .cart-table td:nth-child(2) { display: none; } /* skryj cenu za kus */
+    .cart-summary { padding: 20px; }
+
+    /* === POKLADNA === */
+    .checkout-layout { grid-template-columns: 1fr !important; }
+    .checkout-summary { position: static !important; order: -1; } /* souhrn nahoře na mobilu */
+    .checkout-city-zip { grid-template-columns: 1fr 1fr !important; }
+
+    /* === GALERIE === */
+    .gallery-albums-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 12px; }
+    .photo-grid-mobile { grid-template-columns: repeat(3, 1fr) !important; gap: 6px; }
+
+    /* === STÁNEK === */
+    .stanek-layout { grid-template-columns: 1fr !important; }
+    .stanek-features { grid-template-columns: 1fr 1fr !important; }
+
+    /* === KONTAKT === */
+    .contact-layout { grid-template-columns: 1fr !important; }
+    .contact-info-grid { grid-template-columns: 1fr 1fr !important; gap: 16px; }
+
+    /* === BENEFITY === */
+    .benefits-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .benefit-card { padding: 20px 16px; }
+
+    /* === NOVINKY === */
+    .articles-grid { grid-template-columns: 1fr; }
+
+    /* === ACCOUNT === */
+    .account-layout { grid-template-columns: 1fr !important; }
+    .account-stats-grid { grid-template-columns: repeat(3, 1fr) !important; gap: 10px; }
+    .account-nav { display: flex; overflow-x: auto; gap: 0; border-radius: var(--radius-lg); }
+    .account-nav a { flex-shrink: 0; white-space: nowrap; border-bottom: none !important; border-right: 1px solid var(--border); padding: 10px 14px; font-size: 12px; }
+    .loyalty-grid { grid-template-columns: 1fr !important; }
+    .benefits-unlock-grid { grid-template-columns: 1fr 1fr !important; }
+
+    /* === FOOTER === */
+    .footer { padding: 32px 0 0; }
+    .footer-grid { grid-template-columns: 1fr; gap: 24px; padding-bottom: 32px; }
+    .footer-col { padding-bottom: 16px; border-bottom: 1px solid rgba(255,255,255,0.08); }
+    .footer-col:last-child { border-bottom: none; }
+    .footer-bottom { font-size: 12px; padding: 16px 0; }
+
+    /* === SECTION HEADERS === */
+    .section-header { margin-bottom: 32px; }
+    .section-title { font-size: 1.7rem; }
+    .section-desc { font-size: 0.95rem; }
+
+    /* === BANNER === */
+    .banner-section { padding: 48px 16px; }
+    .banner-section .section-title { font-size: 1.6rem; }
+    .banner-section .section-desc { font-size: 0.9rem; }
+
+    /* === PAGE HERO === */
+    .page-hero { padding: 28px 0 20px; }
+    .page-hero h1 { font-size: 1.6rem; }
+
+    /* === FORMS === */
+    .form-control { font-size: 16px; } /* zabraňuje zoomu na iOS */
+
+    /* === BREADCRUMB === */
+    .breadcrumb { font-size: 12px; }
+
+    /* === ALERTS === */
+    .alert { font-size: 13px; padding: 12px 16px; }
+
+    /* === CART TABLE mobile - card layout === */
+    .cart-mobile-card { display: none; }
+}
+
+/* MALÝ MOBIL 480px */
+@media (max-width: 480px) {
+
+    /* Produkty - 2 sloupce zůstanou ale menší */
+    .products-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+    .product-img { aspect-ratio: 1; }
+    .product-info { padding: 10px; }
+    .product-name { font-size: 0.85rem; line-height: 1.3; }
+    .product-price { font-size: 1rem; }
+    .product-footer .btn { padding: 8px 12px; font-size: 12px; }
+
+    /* Hero */
+    .hero-title { font-size: 1.9rem; }
+    .hero-actions { flex-direction: column; align-items: center; }
+    .hero-actions .btn { max-width: 280px; width: 100%; }
+    .hero-stats { flex-direction: column; gap: 8px; text-align: center; }
+
+    /* Benefity - 1 sloupec */
+    .benefits-grid { grid-template-columns: 1fr; }
+
+    /* Account stats - stack */
+    .account-stats-grid { grid-template-columns: 1fr !important; gap: 8px; }
+
+    /* Buttons */
+    .btn { padding: 11px 18px; }
+    .btn-lg { padding: 13px 22px; font-size: 15px; }
+
+    /* Galerie */
+    .gallery-albums-grid { grid-template-columns: 1fr !important; }
+    .photo-grid-mobile { grid-template-columns: repeat(2, 1fr) !important; }
+
+    /* Stánek features */
+    .stanek-features { grid-template-columns: 1fr !important; }
+
+    /* Pokladna platba */
+    .payment-options label { padding: 12px !important; }
+
+    /* Košík summary */
+    .cart-summary { padding: 16px; }
+    .cart-total-row { font-size: 14px; }
+
+    /* Free shipping bar */
+    .free-shipping-bar { font-size: 12px; padding: 10px 14px; }
+
+    /* Topbar - skryj email */
+    .topbar { display: none; } /* na nejmenším schovej celý topbar */
+}
+
+/* TOUCH OPTIMALIZACE */
+@media (hover: none) and (pointer: coarse) {
+    /* Větší touch oblasti */
+    .btn { min-height: 44px; }
+    .cart-btn { padding: 10px; }
+    .qty-btn { width: 40px; height: 40px; }
+    .filter-btn { min-height: 40px; }
+    .nav a { min-height: 48px; display: flex; align-items: center; justify-content: center; }
+
+    /* Zakázat hover efekty které mohou být rušivé */
+    .product-card:hover { transform: none; }
+    .benefit-card:hover { transform: none; }
+    .article-card:hover { transform: none; }
+}
+
+/* LANDSCAPE MOBIL */
+@media (max-width: 768px) and (orientation: landscape) {
+    .hero { min-height: auto; padding: 32px 0; }
+    .nav { flex-direction: row; flex-wrap: wrap; justify-content: center; gap: 4px; padding: 16px; }
+    .nav a { font-size: 1rem; padding: 10px 16px; width: auto; }
+}
+
+/* ==================== OPRAVA RESPONZIVITY - KOŠÍK, POKLADNA, KONTAKT ==================== */
+
+/* KOŠÍK - mobile */
+@media (max-width: 768px) {
+    /* Stack košík vertikálně */
+    .cart-layout {
+        grid-template-columns: 1fr !important;
+    }
+
+    /* Tabulka košíku - skryj nepotřebné sloupce */
+    .cart-table th:nth-child(2),
+    .cart-table td:nth-child(2),
+    .cart-table th:nth-child(5),
+    .cart-table td:nth-child(5) {
+        display: none;
+    }
+
+    .cart-table th, .cart-table td {
+        padding: 10px 8px;
+        font-size: 13px;
+    }
+
+    /* Produkt v košíku - menší obrázek */
+    .cart-table td:first-child > div {
+        gap: 8px !important;
+    }
+
+    .cart-table td:first-child > div > div:first-child {
+        width: 48px !important;
+        height: 48px !important;
+        font-size: 1.2rem !important;
+    }
+
+    /* Free shipping bar */
+    .free-shipping-bar {
+        font-size: 12px;
+        padding: 10px 12px;
+    }
+
+    /* Souhrn košíku */
+    .cart-summary {
+        padding: 20px 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .cart-table { font-size: 12px; }
+    .cart-table th, .cart-table td { padding: 8px 6px; }
+}
+
+/* POKLADNA - mobile */
+@media (max-width: 768px) {
+    .checkout-layout {
+        grid-template-columns: 1fr !important;
+    }
+
+    /* Souhrn nahoře na mobilu */
+    .checkout-summary-wrap {
+        order: -1;
+    }
+
+    /* Sticky position zruš na mobilu */
+    .checkout-summary-wrap > div {
+        position: static !important;
+    }
+
+    /* Shipping options */
+    label[id^="ship-"] {
+        padding: 12px !important;
+        gap: 10px !important;
+    }
+
+    /* Platební metody */
+    .payment-options label {
+        padding: 10px 12px !important;
+        gap: 10px !important;
+    }
+
+    /* City/zip grid */
+    .checkout-city-zip {
+        grid-template-columns: 1fr 100px !important;
+        gap: 10px !important;
+    }
+
+    /* Pokladna karty */
+    .checkout-layout > div:first-child > div {
+        padding: 20px 16px !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .checkout-city-zip {
+        grid-template-columns: 1fr !important;
+    }
+}
+
+/* KONTAKT - mobile */
+@media (max-width: 768px) {
+    .contact-layout {
+        grid-template-columns: 1fr !important;
+        gap: 32px !important;
+    }
+
+    /* Kontaktní ikony - 2 sloupce */
+    .contact-info-items {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+    }
+
+    /* Mapa výška */
+    .contact-map iframe {
+        height: 220px !important;
+    }
+
+    /* Kontaktní formulář */
+    .contact-form-grid {
+        grid-template-columns: 1fr !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .contact-info-items {
+        grid-template-columns: 1fr !important;
+    }
+}
+
+/* OBECNÉ OPRAVY pro všechny stránky na mobilu */
+@media (max-width: 768px) {
+    /* Nadpisy stránek */
+    .page-hero h1 { font-size: 1.5rem !important; }
+
+    /* Sekce s gridy - vždy stack */
+    [style*="grid-template-columns:1fr 1fr"],
+    [style*="grid-template-columns: 1fr 1fr"] {
+        grid-template-columns: 1fr !important;
+    }
+
+    /* Formuláře - větší písmo kvůli iOS zoom */
+    input, select, textarea {
+        font-size: 16px !important;
+    }
+
+    /* Tlačítka - větší touch area */
+    .btn {
+        min-height: 44px;
+    }
+}
+
+/* ==================== GALERIE PRODUKTU ==================== */
+.product-gallery {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.product-main-img {
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background: var(--gray-light);
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: zoom-in;
+    position: relative;
+}
+
+.product-main-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.product-main-img:hover img {
+    transform: scale(1.03);
+}
+
+.product-thumbs {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.product-thumb {
+    width: 72px;
+    height: 72px;
+    border-radius: var(--radius);
+    overflow: hidden;
+    cursor: pointer;
+    border: 2px solid var(--border);
+    background: var(--gray-light);
+    transition: border-color 0.2s, transform 0.2s;
+    flex-shrink: 0;
+}
+
+.product-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.product-thumb:hover {
+    border-color: var(--orange);
+    transform: translateY(-2px);
+}
+
+.product-thumb.active {
+    border-color: var(--orange);
+    border-width: 2px;
+    box-shadow: 0 0 0 2px rgba(232,99,26,0.2);
+}
+
+/* MOBILNÍ - fotka nahoře, info dole */
+@media (max-width: 768px) {
+    /* Product detail grid - stack */
+    .product-detail-grid {
+        grid-template-columns: 1fr !important;
+        gap: 24px !important;
+    }
+
+    /* Galerie - hlavní foto menší */
+    .product-main-img {
+        aspect-ratio: 4/3;
+        max-height: 320px;
+    }
+
+    /* Miniaturky - scrollovatelné */
+    .product-thumbs {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        padding-bottom: 4px;
+        -webkit-overflow-scrolling: touch;
+        gap: 8px;
+    }
+
+    .product-thumbs::-webkit-scrollbar { height: 3px; }
+    .product-thumbs::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+    .product-thumb {
+        width: 64px;
+        height: 64px;
+        flex-shrink: 0;
+    }
+
+    /* Benefity pod košíkem - 1 sloupec */
+    .product-detail-benefits {
+        grid-template-columns: 1fr 1fr !important;
+        gap: 8px !important;
+    }
+
+    /* Cena větší na mobilu */
+    .product-sale-price {
+        font-size: 1.8rem !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .product-main-img {
+        aspect-ratio: 1;
+        max-height: 280px;
+    }
+
+    .product-thumb {
+        width: 56px;
+        height: 56px;
+    }
+
+    .product-detail-benefits {
+        grid-template-columns: 1fr !important;
+    }
+}
+
+/* ==================== PRODUKTOVÁ STRÁNKA - POLISH ==================== */
+
+/* Hlavní foto - bez šedého rámečku, čistá bílá */
+.product-main-img {
+    background: white !important;
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
+}
+
+.product-main-img img {
+    object-fit: contain !important;
+    padding: 16px;
+}
+
+/* Miniaturky - čistší */
+.product-thumb {
+    background: white;
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+}
+
+.product-thumb img {
+    object-fit: contain;
+    padding: 4px;
+}
+
+.product-thumb.active {
+    border-color: var(--orange);
+    box-shadow: 0 0 0 2px rgba(232,99,26,0.15);
+}
+
+/* Badge štítky - menší, elegantnější */
+.product-badge-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-bottom: 12px;
+}
+
+/* Kategorie label */
+.product-detail-category {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 6px;
+}
+
+/* Název produktu */
+.product-detail-name {
+    font-family: var(--font-display);
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    font-weight: 900;
+    line-height: 1.15;
+    margin-bottom: 12px;
+    color: var(--black);
+}
+
+/* Cena */
+.product-detail-price {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    font-weight: 900;
+    color: var(--orange);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+}
+
+.product-detail-price-old {
+    font-size: 1.1rem;
+    font-weight: 400;
+    color: var(--gray);
+    text-decoration: line-through;
+}
+
+/* Popis */
+.product-detail-desc {
+    color: var(--gray-dark);
+    line-height: 1.8;
+    margin-bottom: 20px;
+    font-size: 1rem;
+}
+
+/* Sklad badge */
+.product-stock-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 6px 14px;
+    border-radius: 50px;
+    margin-bottom: 24px;
+}
+
+/* Qty + košík row */
+.product-add-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 28px;
+}
+
+.product-qty-wrap {
+    display: flex;
+    align-items: center;
+    border: 2px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    height: 48px;
+}
+
+.product-qty-wrap button {
+    width: 44px;
+    height: 100%;
+    border: none;
+    background: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    color: var(--gray-dark);
+    transition: background 0.15s;
+}
+
+.product-qty-wrap button:hover {
+    background: var(--gray-light);
+}
+
+.product-qty-wrap input {
+    width: 52px;
+    height: 100%;
+    border: none;
+    border-left: 1px solid var(--border);
+    border-right: 1px solid var(--border);
+    text-align: center;
+    font-size: 1rem;
+    font-weight: 700;
+    font-family: var(--font-body);
+    outline: none;
+    background: white;
+}
+
+/* Benefity pod košíkem */
+.product-benefits {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+}
+
+.product-benefit-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    color: var(--gray-dark);
+}
+
+/* Related products section */
+.product-related {
+    margin-top: 64px;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .product-detail-name { font-size: 1.5rem; }
+    .product-detail-price { font-size: 1.6rem; }
+    .product-add-row { gap: 8px; }
+    .product-add-row .btn { flex: 1; }
+    .product-benefits { grid-template-columns: 1fr; gap: 6px; }
+    .product-main-img img { padding: 8px; }
+}
+
+/* ==================== FIX PRODUKTOVÁ GALERIE ==================== */
+/* Přepíše předchozí definice */
+
+.product-gallery {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 10px !important;
+    position: sticky;
+    top: 90px;
+}
+
+.product-main-img {
+    width: 100% !important;
+    aspect-ratio: 1 !important;
+    border-radius: var(--radius-lg) !important;
+    overflow: hidden !important;
+    background: white !important;
+    border: 1px solid var(--border) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    cursor: zoom-in !important;
+}
+
+.product-main-img img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain !important;
+    padding: 20px !important;
+    transition: transform 0.3s ease !important;
+}
+
+.product-main-img:hover img {
+    transform: scale(1.04) !important;
+}
+
+.product-thumbs {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+    gap: 8px !important;
+}
+
+.product-thumb {
+    width: 72px !important;
+    height: 72px !important;
+    border-radius: 8px !important;
+    overflow: hidden !important;
+    cursor: pointer !important;
+    border: 2px solid var(--border) !important;
+    background: white !important;
+    flex-shrink: 0 !important;
+    transition: border-color 0.2s, transform 0.2s !important;
+}
+
+.product-thumb img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain !important;
+    padding: 4px !important;
+}
+
+.product-thumb:hover {
+    border-color: var(--orange) !important;
+    transform: translateY(-2px) !important;
+}
+
+.product-thumb.active {
+    border-color: var(--orange) !important;
+    box-shadow: 0 0 0 2px rgba(232,99,26,0.2) !important;
+}
+
+@media (max-width: 768px) {
+    .product-gallery { position: static !important; }
+    .product-main-img { aspect-ratio: 4/3 !important; }
+    .product-main-img img { padding: 12px !important; }
+    .product-thumbs {
+        flex-wrap: nowrap !important;
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+    }
+    .product-thumb {
+        width: 64px !important;
+        height: 64px !important;
+    }
+}

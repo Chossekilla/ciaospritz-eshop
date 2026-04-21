@@ -1,0 +1,32 @@
+Options -Indexes
+
+# Ochrana admin složky - přidej IP nebo heslo v Hostinger panelu
+# <Directory /admin>
+#   AuthType Basic
+#   AuthName "Admin"
+#   AuthUserFile /home/.htpasswd
+#   Require valid-user
+# </Directory>
+
+# Přesměrování na HTTPS
+# RewriteEngine On
+# RewriteCond %{HTTPS} off
+# RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Zabezpečení uploads složky
+<FilesMatch "\.(php|php3|php4|php5|phtml|pl|py|cgi)$">
+    Order Deny,Allow
+    Deny from all
+</FilesMatch>
+
+# Cache pro statické soubory
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType image/jpg "access plus 1 year"
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType image/png "access plus 1 year"
+    ExpiresByType image/gif "access plus 1 year"
+    ExpiresByType image/webp "access plus 1 year"
+    ExpiresByType text/css "access plus 1 month"
+    ExpiresByType application/javascript "access plus 1 month"
+</IfModule>
