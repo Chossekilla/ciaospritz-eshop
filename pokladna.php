@@ -1,6 +1,7 @@
 <?php
 $pageTitle = 'Pokladna';
 require_once 'includes/header.php';
+require_once 'includes/mailer.php';
 
 $lang = LANG;
 $cart = $_SESSION['cart'] ?? [];
@@ -53,22 +54,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             $pdo->commit();
 
-            // Odeslat email zákazníkovi
-            $itemsList = '';
-            foreach ($cart as $item) {
-                $itemsList .= "- {$item['name']} x{$item['quantity']} = " . number_format($item['price'] * $item['quantity'], 0, ',', ' ') . " Kč\n";
-            }
-
-            $emailBody = t(
-                "Dobrý den {$name},\n\nDěkujeme za Vaši objednávku č. {$orderNumber}!\n\nObjednané produkty:\n{$itemsList}\nMezisoučet: " . number_format($subtotal,0,',',' ') . " Kč\nDoprava: " . ($shippingPrice === 0 ? 'ZDARMA' : number_format($shippingPrice,0,',',' ')." Kč") . "\nCelkem: " . number_format($total,0,',',' ') . " Kč\n\nZpůsob platby: {$payment}\n\nS pozdravem,\nCiao Spritz tým\nrcaffe@email.cz | 602 556 323",
-                "Dear {$name},\n\nThank you for your order #{$orderNumber}!\n\nOrdered products:\n{$itemsList}\nSubtotal: " . number_format($subtotal,0,',',' ') . " CZK\nShipping: " . ($shippingPrice === 0 ? 'FREE' : number_format($shippingPrice,0,',',' ')." CZK") . "\nTotal: " . number_format($total,0,',',' ') . " CZK\n\nPayment method: {$payment}\n\nBest regards,\nCiao Spritz team\nrcaffe@email.cz | 602 556 323"
-            );
-
-            mail($email, t("Potvrzení objednávky #{$orderNumber} - Ciao Spritz", "Order confirmation #{$orderNumber} - Ciao Spritz"), $emailBody, "From: Ciao Spritz <rcaffe@email.cz>\r\nContent-Type: text/plain; charset=UTF-8");
-
-            // Email provozovateli
-            $adminBody = "Nová objednávka #{$orderNumber}\n\nZákazník: {$name} ({$email})\nTelefon: {$phone}\nAdresa: {$address}, {$zip} {$city}\n\nProduky:\n{$itemsList}\nCelkem: " . number_format($total,0,',',' ') . " Kč\nDoprava: {$shipping}\nPlatba: {$payment}\nPoznámka: {$note}";
-            mail('rcaffe@email.cz', "Nová objednávka #{$orderNumber}", $adminBody, "From: web@ciaospritz.cz\r\nContent-Type: text/plain; charset=UTF-8");
+            // Odeslat HTML emaily přes mailer.php
+            $orderData = [
+                'id'              => $orderId,
+                'order_number'    => $orderNumber,
+                'customer_name'   => $name,
+                'customer_email'  => $email,
+                'customer_phone'  => $phone,
+                'address'         => $address,
+                'city'            => $city,
+                'zip'             => $zip,
+                'total'           => $total,
+                'shipping_price'  => $shippingPrice,
+                'shipping_method' => $shipping,
+                'payment_method'  => $payment,
+                'note'            => $note,
+            ];
+            $cartItems = array_values($cart);
+            foreach ($cartItems as &$ci) { $ci['product_name'] = $ci['name']; }
+            unset($ci);
+            sendOrderConfirmation($pdo, $orderData, $cartItems);
+            sendOrderAdmin($pdo, $orderData, $cartItems);
 
             // Přidat věrnostní body
             if (isset($_SESSION["user_id"])) {
