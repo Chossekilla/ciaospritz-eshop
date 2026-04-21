@@ -2208,3 +2208,74 @@ select.form-control { cursor: pointer; }
         background: white;
     }
 }
+
+/* ==================== MOBILNÍ OPRAVY ==================== */
+
+/* Košík - větší a viditelnější na mobilu */
+@media (max-width: 768px) {
+    .cart-btn {
+        font-size: 1.6rem !important;
+        padding: 10px !important;
+        background: var(--orange) !important;
+        border-radius: 50% !important;
+        color: white !important;
+        width: 44px !important;
+        height: 44px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+    .cart-badge {
+        top: -4px !important;
+        right: -4px !important;
+        width: 20px !important;
+        height: 20px !important;
+        font-size: 11px !important;
+        background: var(--black) !important;
+    }
+    .btn-icon {
+        font-size: 1.4rem !important;
+        padding: 10px !important;
+    }
+    .hamburger {
+        padding: 10px !important;
+    }
+    .hamburger span {
+        width: 26px !important;
+        height: 2.5px !important;
+    }
+}
+
+/* Kontakt - oprava přetékání */
+@media (max-width: 768px) {
+    .kontakt-grid {
+        grid-template-columns: 1fr !important;
+        gap: 32px !important;
+        overflow: hidden !important;
+    }
+    /* Skryj druhý sloupec (formulář) pokud přetéká */
+    .kontakt-grid > div:last-child {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+}
+
+/* ---- KONTAKT FORMULÁŘ VNITŘNÍ GRID ---- */
+@media (max-width: 600px) {
+    /* Jméno + email pod sebou */
+    .kontakt-grid form [style*="grid-template-columns:1fr 1fr"],
+    .kontakt-grid form [style*="grid-template-columns: 1fr 1fr"] {
+        grid-template-columns: 1fr !important;
+    }
+    /* Formulář menší padding */
+    .kontakt-grid > div > div[style*="padding:40px"] {
+        padding: 24px !important;
+    }
+    /* Mapa menší */
+    .contact-map {
+        height: 200px !important;
+    }
+    .contact-map iframe {
+        height: 200px !important;
+    }
+}
