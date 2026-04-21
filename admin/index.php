@@ -112,6 +112,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($action === 'update_order_status' && canAccess('orders')) {
         $pdo->prepare("UPDATE orders SET status=? WHERE id=?")->execute([$_POST['status'], $_POST['id']]);
         logAction($pdo, 'Změna stavu objednávky', 'ID: ' . $_POST['id'] . ' → ' . $_POST['status']);
+        // Odeslat email zákazníkovi při změně stavu
+        if (in_array($_POST['status'], ['odeslana', 'pripravena'])) {
+            require_once __DIR__.'/../includes/mailer.php';
+            $ord = $pdo->prepare("SELECT * FROM orders WHERE id=?");
+            $ord->execute([$_POST['id']]);
+            $orderRow = $ord->fetch();
+            if ($orderRow) sendOrderStatusEmail($pdo, $orderRow, $_POST['status']);
+        }
         $message = '✅ Stav objednávky aktualizován.';
     }
     if ($action === 'delete_article' && canAccess('articles')) {
@@ -161,26 +169,26 @@ $role = $_SESSION['staff_role'];
         body { font-family: 'DM Sans', sans-serif; background: #f5f5f5; color: #111; display: flex; min-height: 100vh; }
 
         /* SIDEBAR */
-        .sidebar { width: 240px; background: #111; color: white; flex-shrink: 0; display: flex; flex-direction: column; position: fixed; top: 0; left: 0; bottom: 0; overflow-y: auto; z-index: 100; }
-        .sidebar-logo { padding: 24px 20px; border-bottom: 1px solid rgba(255,255,255,0.08); }
-        .sidebar-logo .brand { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 900; }
+        .sidebar { width: 270px; background: #111; color: white; flex-shrink: 0; display: flex; flex-direction: column; position: fixed; top: 0; left: 0; bottom: 0; overflow-y: auto; z-index: 100; }
+        .sidebar-logo { padding: 28px 24px; border-bottom: 1px solid rgba(255,255,255,0.08); }
+        .sidebar-logo .brand { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 900; }
         .sidebar-logo .brand span { color: #E8631A; }
         .sidebar-logo .role-badge { margin-top: 8px; }
-        .sidebar-user { padding: 16px 20px; border-bottom: 1px solid rgba(255,255,255,0.08); }
-        .sidebar-user .name { font-weight: 600; font-size: 14px; }
-        .sidebar-user .email { font-size: 11px; color: rgba(255,255,255,0.4); margin-top: 2px; }
-        .sidebar nav { padding: 12px; flex: 1; }
-        .nav-section { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.3); padding: 12px 8px 6px; }
-        .sidebar nav a { display: flex; align-items: center; gap: 10px; padding: 9px 12px; border-radius: 8px; color: rgba(255,255,255,0.65); font-size: 13px; font-weight: 500; text-decoration: none; transition: all 0.2s; margin-bottom: 2px; }
-        .sidebar nav a:hover { background: rgba(255,255,255,0.07); color: white; }
-        .sidebar nav a.active { background: rgba(232,99,26,0.2); color: #E8631A; }
+        .sidebar-user { padding: 18px 24px; border-bottom: 1px solid rgba(255,255,255,0.08); }
+        .sidebar-user .name { font-weight: 600; font-size: 16px; }
+        .sidebar-user .email { font-size: 13px; color: rgba(255,255,255,0.4); margin-top: 3px; }
+        .sidebar nav { padding: 14px; flex: 1; }
+        .nav-section { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.3); padding: 16px 10px 8px; }
+        .sidebar nav a { display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-radius: 10px; color: rgba(255,255,255,0.75); font-size: 15px; font-weight: 500; text-decoration: none; transition: all 0.2s; margin-bottom: 3px; }
+        .sidebar nav a:hover { background: rgba(255,255,255,0.09); color: white; }
+        .sidebar nav a.active { background: rgba(232,99,26,0.2); color: #E8631A; font-weight: 600; }
         .sidebar nav a.disabled { opacity: 0.3; pointer-events: none; }
-        .sidebar-footer { padding: 12px; border-top: 1px solid rgba(255,255,255,0.08); }
-        .sidebar-footer a { display: flex; align-items: center; gap: 8px; color: rgba(255,255,255,0.45); font-size: 13px; text-decoration: none; padding: 8px 12px; border-radius: 8px; }
-        .sidebar-footer a:hover { color: white; background: rgba(255,255,255,0.05); }
+        .sidebar-footer { padding: 14px; border-top: 1px solid rgba(255,255,255,0.08); }
+        .sidebar-footer a { display: flex; align-items: center; gap: 10px; color: rgba(255,255,255,0.5); font-size: 14px; text-decoration: none; padding: 10px 14px; border-radius: 10px; }
+        .sidebar-footer a:hover { color: white; background: rgba(255,255,255,0.07); }
 
         /* MAIN */
-        .main { margin-left: 240px; flex: 1; display: flex; flex-direction: column; }
+        .main { margin-left: 270px; flex: 1; display: flex; flex-direction: column; }
         .topbar { background: white; border-bottom: 1px solid #e0e0e0; padding: 16px 32px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 50; }
         .topbar h1 { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 900; }
         .topbar-actions { display: flex; gap: 12px; align-items: center; }
@@ -273,6 +281,7 @@ $role = $_SESSION['staff_role'];
 
         <?php if (canAccess('staff')): ?>
         <div class="nav-section">Nástroje</div>
+        <a href="<?= BASE_URL ?>/admin/emails.php">📧 Email šablony</a>
         <a href="<?= BASE_URL ?>/admin/export.php">📤 XML Export</a>
         <a href="<?= BASE_URL ?>/admin/ai-descriptions.php">🤖 AI Popisy</a>
         <div class="nav-section">Systém</div>
