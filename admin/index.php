@@ -258,7 +258,8 @@ $role = $_SESSION['staff_role'];
         <a href="?section=products" class="<?= !canAccess('products')?'disabled':($section==='products'?'active':'') ?>">🍾 Produkty</a>
 
         <div class="nav-section">Obsah</div>
-        <a href="<?= BASE_URL ?>/admin/hero.php" class="<?= !canAccess('articles')?'disabled':'' ?>">🖼️ Hero banner</a>
+        <a href="<?= BASE_URL ?>/admin/media.php" class="<?= !canAccess('articles')?'disabled':'' ?>">📁 Media Manager</a>
+        <a href="<?= BASE_URL ?>/admin/hero.php" class="<?= !canAccess('articles')?'disabled':'' ?>">🌅 Hero banner</a>
         <a href="?section=articles" class="<?= !canAccess('articles')?'disabled':($section==='articles'?'active':'') ?>">📰 Články</a>
         <a href="<?= BASE_URL ?>/admin/gallery.php" class="<?= !canAccess('gallery')?'disabled':'' ?>">🖼️ Galerie</a>
         <a href="<?= BASE_URL ?>/admin/reservations.php" class="<?= !canAccess('reservations')?'disabled':'' ?>">
