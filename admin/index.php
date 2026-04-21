@@ -428,7 +428,7 @@ $role = $_SESSION['staff_role'];
         <div class="card">
             <div class="card-header"><h2>🛒 Všechny objednávky (<?= count($items) ?>)</h2></div>
             <table>
-                <thead><tr><th>Číslo</th><th>Zákazník</th><th>Celkem</th><th>Doprava</th><th>Platba</th><th>Stav</th><th>Datum</th></tr></thead>
+                <thead><tr><th>Číslo</th><th>Zákazník</th><th>Celkem</th><th>Doprava</th><th>Platba</th><th>Stav</th><th>Datum</th><th>Faktura</th></tr></thead>
                 <tbody>
                 <?php foreach ($items as $o): ?>
                 <tr>
@@ -453,6 +453,7 @@ $role = $_SESSION['staff_role'];
                         </form>
                     </td>
                     <td style="color:#888;font-size:12px"><?= date('d.m.Y', strtotime($o['created_at'])) ?></td>
+                    <td><a href="<?= BASE_URL ?>/admin/faktura.php?id=<?= $o['id'] ?>" target="_blank" class="btn btn-outline" title="Faktura">🧾</a></td>
                 </tr>
                 <?php endforeach; ?>
                 </tbody>
