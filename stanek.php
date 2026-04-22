@@ -43,12 +43,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // Email adminovi
         $body = "Nová poptávka zapůjčení stánku!\n\nJméno: $name\nEmail: $email\nTelefon: $phone\nOd: $date_from\nDo: $date_to\nMísto: $location\nTyp akce: $event_type\nZpráva: $message";
-        mail('rcaffe@email.cz', 'Nová rezervace stánku - Ciao Spritz', $body, "From: web@ciaospritz.cz\r\nContent-Type: text/plain; charset=UTF-8");
+        mail('<?= SHOP_EMAIL ?>', 'Nová rezervace stánku - Ciao Spritz', $body, "From: web@ciaospritz.cz\r\nContent-Type: text/plain; charset=UTF-8");
 
         // Email zákazníkovi
         $bodyCustomer = t(
-            "Dobrý den $name,\n\nDěkujeme za váš zájem o zapůjčení stánku Ciao Spritz!\n\nVaše poptávka byla přijata a my vás budeme kontaktovat co nejdříve.\n\nTermín: $date_from – $date_to\nMísto: $location\n\nS pozdravem,\nCiao Spritz tým\nrcaffe@email.cz | 602 556 323",
-            "Dear $name,\n\nThank you for your interest in renting the Ciao Spritz stand!\n\nYour enquiry has been received and we will contact you as soon as possible.\n\nDates: $date_from – $date_to\nLocation: $location\n\nBest regards,\nCiao Spritz team\nrcaffe@email.cz | 602 556 323"
+            "Dobrý den $name,\n\nDěkujeme za váš zájem o zapůjčení stánku Ciao Spritz!\n\nVaše poptávka byla přijata a my vás budeme kontaktovat co nejdříve.\n\nTermín: $date_from – $date_to\nMísto: $location\n\nS pozdravem,\nCiao Spritz tým\nrcaffe@email.cz | <?= SHOP_PHONE ?>",
+            "Dear $name,\n\nThank you for your interest in renting the Ciao Spritz stand!\n\nYour enquiry has been received and we will contact you as soon as possible.\n\nDates: $date_from – $date_to\nLocation: $location\n\nBest regards,\nCiao Spritz team\nrcaffe@email.cz | <?= SHOP_PHONE ?>"
         );
         mail($email, t('Potvrzení poptávky - Ciao Spritz', 'Enquiry confirmation - Ciao Spritz'), $bodyCustomer, "From: Ciao Spritz <rcaffe@email.cz>\r\nContent-Type: text/plain; charset=UTF-8");
 

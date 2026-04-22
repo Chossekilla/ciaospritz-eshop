@@ -51,8 +51,14 @@
             <div class="footer-col">
                 <h4><?= t('Kontakt', 'Contact') ?></h4>
                 <ul>
-                    <li>📞 <a href="tel:602556323">602 556 323</a></li>
-                    <li>✉️ <a href="mailto:rcaffe@email.cz">rcaffe@email.cz</a></li>
+                    <li>📞 <a href="tel:<?= SHOP_PHONE_RAW ?>"><?= SHOP_PHONE ?></a></li>
+                    <li>✉️ <a href="mailto:<?= SHOP_EMAIL ?>"><?= SHOP_EMAIL ?></a></li>
+                    <?php if (defined('SHOP_ADDRESS') && SHOP_ADDRESS): ?>
+                    <li>📍 <?= SHOP_ADDRESS ?></li>
+                    <?php endif; ?>
+                    <?php if (defined('SHOP_ICO') && SHOP_ICO): ?>
+                    <li style="font-size:12px;color:var(--gray)">IČO: <?= SHOP_ICO ?></li>
+                    <?php endif; ?>
                 </ul>
                 <h4 style="margin-top:1.5rem"><?= t('Platební metody', 'Payment methods') ?></h4>
                 <div class="payment-icons">

@@ -39,8 +39,8 @@ $currentPage = basename($_SERVER['PHP_SELF'], '.php');
 <!-- TOP BAR -->
 <div class="topbar">
     <div class="container">
-        <span>📞 <a href="tel:602556323">602 556 323</a></span>
-        <span>✉️ <a href="mailto:rcaffe@email.cz">rcaffe@email.cz</a></span>
+        <span>📞 <a href="tel:<?= SHOP_PHONE_RAW ?>"><?= SHOP_PHONE ?></a></span>
+        <span>✉️ <a href="mailto:rcaffe@email.cz"><?= SHOP_EMAIL ?></a></span>
         <div class="lang-switch">
             <a href="?lang=cs" class="<?= LANG === 'cs' ? 'active' : '' ?>">CZ</a>
             <span>|</span>

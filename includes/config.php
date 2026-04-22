@@ -18,6 +18,16 @@ define('BASE_URL', $protocol . '://' . $_SERVER['HTTP_HOST']);
 define('FREE_SHIPPING_FROM', 2000);
 define('SHIPPING_PRICE', 120);
 
+// Kontaktní a firemní údaje - změnit při přechodu na ciaospritz.cz
+define('SHOP_EMAIL', 'rcaffe@email.cz');
+define('SHOP_PHONE', '602 556 323');
+define('SHOP_PHONE_RAW', '602556323');
+define('SHOP_COMPANY', 'Ciao Spritz');
+define('SHOP_ICO', '');   // doplnit
+define('SHOP_DIC', '');   // doplnit
+define('SHOP_BANK', '2502996691/2010');
+define('SHOP_ADDRESS', 'Praha, Česká republika');
+
 // Jazyk (cs / en)
 if (!isset($_SESSION['lang'])) {
     $_SESSION['lang'] = 'cs';

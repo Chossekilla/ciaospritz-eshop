@@ -263,7 +263,7 @@ $total = $subtotal + $shippingPrice;
 
                     <p style="font-size:12px;color:var(--gray);text-align:center;margin-top:12px">
                         <?= t('Odesláním souhlasíte s', 'By submitting you agree to') ?>
-                        <a href="<?= BASE_URL ?>/obchodni-podminky.php" style="color:var(--orange)"><?= t('obchodními podmínkami', 'terms & conditions') ?></a>.
+                        <a href="<?= BASE_URL ?>/stranka/obchodni-podminky" style="color:var(--orange)"><?= t('obchodními podmínkami', 'terms & conditions') ?></a>.
                     </p>
                 </div>
             </div>

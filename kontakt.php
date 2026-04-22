@@ -12,7 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $message = trim($_POST['message'] ?? '');
 
     if ($name && $email && $message && filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $to = 'rcaffe@email.cz';
+        $to = '<?= SHOP_EMAIL ?>';
         $headers = "From: $name <$email>\r\nReply-To: $email\r\nContent-Type: text/plain; charset=UTF-8";
         $body = "Jméno: $name\nEmail: $email\nPředmět: $subject\n\nZpráva:\n$message";
 
@@ -40,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <section class="section">
     <div class="container">
-        <div class="kontakt-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start">
+        <div class="kontakt-grid">
 
             <!-- KONTAKTNÍ INFO -->
             <div>
@@ -54,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <div style="width:48px;height:48px;background:rgba(232,99,26,0.1);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0">📞</div>
                         <div>
                             <div style="font-size:12px;color:var(--gray);text-transform:uppercase;letter-spacing:0.05em"><?= t('Telefon', 'Phone') ?></div>
-                            <a href="tel:602556323" style="font-size:1.1rem;font-weight:600;color:var(--orange)">602 556 323</a>
+                            <a href="tel:<?= SHOP_PHONE_RAW ?>" style="font-size:1.1rem;font-weight:600;color:var(--orange)"><?= SHOP_PHONE ?></a>
                         </div>
                     </div>
 
@@ -62,7 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <div style="width:48px;height:48px;background:rgba(232,99,26,0.1);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0">✉️</div>
                         <div>
                             <div style="font-size:12px;color:var(--gray);text-transform:uppercase;letter-spacing:0.05em">Email</div>
-                            <a href="mailto:rcaffe@email.cz" style="font-size:1.1rem;font-weight:600;color:var(--orange)">rcaffe@email.cz</a>
+                            <a href="mailto:rcaffe@email.cz" style="font-size:1.1rem;font-weight:600;color:var(--orange)"><?= SHOP_EMAIL ?></a>
                         </div>
                     </div>
 

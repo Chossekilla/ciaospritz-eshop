@@ -417,8 +417,8 @@ $autoPrint = isset($_GET['print']);
                 Petr Mašek<br>
                 IČO: doplňte<br>
                 DIČ: doplňte<br>
-                rcaffe@email.cz<br>
-                602 556 323
+                <?= SHOP_EMAIL ?><br>
+                <?= SHOP_PHONE ?>
             </p>
         </div>
         <div class="address-block">
@@ -507,7 +507,7 @@ $autoPrint = isset($_GET['print']);
         <div class="payment-grid">
             <div class="payment-item">
                 <div class="label">Číslo účtu</div>
-                <div class="value">2502996691/2010</div>
+                <div class="value"><?= SHOP_BANK ?></div>
             </div>
             <div class="payment-item">
                 <div class="label">Částka</div>
@@ -528,7 +528,7 @@ $autoPrint = isset($_GET['print']);
     <!-- PATIČKA -->
     <div class="invoice-footer">
         <div>
-            <strong>Ciao Spritz</strong> · rcaffe@email.cz · 602 556 323<br>
+            <strong>Ciao Spritz</strong> · <?= SHOP_EMAIL ?> · <?= SHOP_PHONE ?><br>
             Děkujeme za Vaši objednávku! 🍊
         </div>
         <div class="stamp">

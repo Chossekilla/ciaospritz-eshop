@@ -27,14 +27,14 @@ function getDefaultTemplate(string $type): array {
 <p>Způsob dopravy: <strong>{shipping_method}</strong><br>
 Způsob platby: <strong>{payment_method}</strong></p>
 {payment_instructions}
-<p>V případě dotazů nás kontaktujte na <a href="mailto:rcaffe@email.cz">rcaffe@email.cz</a> nebo na tel. <strong>602 556 323</strong>.</p>',
+<p>V případě dotazů nás kontaktujte na <a href="mailto:rcaffe@email.cz"><?= SHOP_EMAIL ?></a> nebo na tel. <strong><?= SHOP_PHONE ?></strong>.</p>',
             'body_en' => '<p>Dear <strong>{customer_name}</strong>,</p>
 <p>Thank you for your order! We have received it and will process it shortly.</p>
 {items_table}
 <p>Shipping method: <strong>{shipping_method}</strong><br>
 Payment method: <strong>{payment_method}</strong></p>
 {payment_instructions}
-<p>If you have any questions, contact us at <a href="mailto:rcaffe@email.cz">rcaffe@email.cz</a> or call <strong>602 556 323</strong>.</p>',
+<p>If you have any questions, contact us at <a href="mailto:rcaffe@email.cz"><?= SHOP_EMAIL ?></a> or call <strong><?= SHOP_PHONE ?></strong>.</p>',
         ],
         'order_shipped' => [
             'type' => 'order_shipped',
@@ -43,11 +43,11 @@ Payment method: <strong>{payment_method}</strong></p>
             'body_cs' => '<p>Dobrý den <strong>{customer_name}</strong>,</p>
 <p>Vaše objednávka č. <strong>{order_number}</strong> byla právě odeslána! 🚚</p>
 <p>Brzy dorazí na Vaši adresu. Sledování zásilky Vám zašleme zvlášť.</p>
-<p>V případě dotazů nás kontaktujte na <a href="mailto:rcaffe@email.cz">rcaffe@email.cz</a>.</p>',
+<p>V případě dotazů nás kontaktujte na <a href="mailto:rcaffe@email.cz"><?= SHOP_EMAIL ?></a>.</p>',
             'body_en' => '<p>Dear <strong>{customer_name}</strong>,</p>
 <p>Your order <strong>{order_number}</strong> has just been shipped! 🚚</p>
 <p>It will arrive at your address soon. We will send tracking information separately.</p>
-<p>If you have any questions, contact us at <a href="mailto:rcaffe@email.cz">rcaffe@email.cz</a>.</p>',
+<p>If you have any questions, contact us at <a href="mailto:rcaffe@email.cz"><?= SHOP_EMAIL ?></a>.</p>',
         ],
         'order_ready' => [
             'type' => 'order_ready',
@@ -56,11 +56,11 @@ Payment method: <strong>{payment_method}</strong></p>
             'body_cs' => '<p>Dobrý den <strong>{customer_name}</strong>,</p>
 <p>Vaše objednávka č. <strong>{order_number}</strong> je připravena k osobnímu vyzvednutí! 🎉</p>
 <p>Kde nás najdete: <strong>Praha — po dohodě</strong><br>
-Kontakt: <strong>602 556 323</strong></p>',
+Kontakt: <strong><?= SHOP_PHONE ?></strong></p>',
             'body_en' => '<p>Dear <strong>{customer_name}</strong>,</p>
 <p>Your order <strong>{order_number}</strong> is ready for pickup! 🎉</p>
 <p>Location: <strong>Prague — by appointment</strong><br>
-Contact: <strong>602 556 323</strong></p>',
+Contact: <strong><?= SHOP_PHONE ?></strong></p>',
         ],
         'order_admin' => [
             'type' => 'order_admin',
@@ -121,8 +121,8 @@ function emailWrapper(string $content, string $title = 'Ciao Spritz'): string {
   <tr><td style="background:#f9f9f9;border-top:1px solid #eee;border-radius:0 0 12px 12px;padding:24px 40px;text-align:center">
     <div style="font-size:13px;color:#888">
       <strong style="color:#E8631A">Ciao Spritz</strong> &nbsp;·&nbsp; 
-      <a href="mailto:rcaffe@email.cz" style="color:#888;text-decoration:none">rcaffe@email.cz</a> &nbsp;·&nbsp; 
-      602 556 323
+      <a href="mailto:rcaffe@email.cz" style="color:#888;text-decoration:none"><?= SHOP_EMAIL ?></a> &nbsp;·&nbsp; 
+      <?= SHOP_PHONE ?>
     </div>
     <div style="font-size:11px;color:#aaa;margin-top:8px">
       © ' . date('Y') . ' Ciao Spritz — italský aperitiv
@@ -243,7 +243,7 @@ function sendOrderAdmin(PDO $pdo, array $order, array $items): void {
     );
 
     $subject = str_replace(['{order_number}', '{customer_name}'], [$order['order_number'], $order['customer_name']], $tpl['subject_cs']);
-    sendEmail('rcaffe@email.cz', $subject, emailWrapper($body));
+    sendEmail('<?= SHOP_EMAIL ?>', $subject, emailWrapper($body));
 }
 
 // Odeslat při změně stavu objednávky

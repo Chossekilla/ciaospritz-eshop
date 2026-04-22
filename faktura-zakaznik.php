@@ -86,7 +86,7 @@ tbody td:not(:first-child){text-align:right}
         <div class="inv-title"><h1>FAKTURA</h1><div class="inv-num"><?= e($invoiceNumber) ?></div><div class="inv-date">Vystaveno: <?= $invoiceDate ?></div><div class="inv-date">Splatnost: <?= $dueDate ?></div></div>
     </div>
     <div class="addresses">
-        <div class="address-block"><h3>Dodavatel</h3><div class="company">Ciao Spritz</div><p>Petr Mašek<br>rcaffe@email.cz<br>602 556 323</p></div>
+        <div class="address-block"><h3>Dodavatel</h3><div class="company">Ciao Spritz</div><p>Petr Mašek<br><?= SHOP_EMAIL ?><br><?= SHOP_PHONE ?></p></div>
         <div class="address-block"><h3>Odběratel</h3><div class="company"><?= e($order['customer_name']) ?></div><p><?php if($order['address']): ?><?= e($order['address']) ?><br><?= e($order['zip'].' '.$order['city']) ?><br><?php endif; ?><?= e($order['customer_email']) ?><?php if($order['customer_phone']): ?><br><?= e($order['customer_phone']) ?><?php endif; ?></p></div>
         <div class="address-block"><h3>Objednávka</h3><p><strong>Číslo:</strong> <?= e($order['order_number']) ?><br><strong>Doprava:</strong> <?= $shippingNames[$order['shipping_method']] ?? $order['shipping_method'] ?><br><strong>Platba:</strong> <?= $paymentNames[$order['payment_method']] ?? $order['payment_method'] ?></p></div>
     </div>
@@ -110,14 +110,14 @@ tbody td:not(:first-child){text-align:right}
     <?php if($order['payment_method']==='prevod'||$order['payment_method']==='bankovní převod'): ?>
     <div class="payment-box"><h3>💳 Platební instrukce</h3>
     <div class="payment-grid">
-        <div><div class="pi-label">Číslo účtu</div><div class="pi-value">2502996691/2010</div></div>
+        <div><div class="pi-label">Číslo účtu</div><div class="pi-value"><?= SHOP_BANK ?></div></div>
         <div><div class="pi-label">Částka</div><div class="pi-value"><?= number_format($order['total'],0,',',' ') ?> Kč</div></div>
         <div><div class="pi-label">Variabilní symbol</div><div class="pi-value"><?= preg_replace('/[^0-9]/','', $order['order_number']) ?></div></div>
         <div><div class="pi-label">Splatnost</div><div class="pi-value"><?= $dueDate ?></div></div>
     </div></div>
     <?php endif; ?>
     <div class="footer">
-        <div><strong style="color:#E8631A">Ciao Spritz</strong> · rcaffe@email.cz · 602 556 323<br>Děkujeme za Vaši objednávku! 🍊</div>
+        <div><strong style="color:#E8631A">Ciao Spritz</strong> · <?= SHOP_EMAIL ?> · <?= SHOP_PHONE ?><br>Děkujeme za Vaši objednávku! 🍊</div>
         <div class="stamp"><div class="stamp-label">Podpis / Razítko</div></div>
     </div>
 </div>
