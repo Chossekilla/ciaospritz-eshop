@@ -44,7 +44,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $address = trim($_POST['address'] ?? '');
         $city = trim($_POST['city'] ?? '');
         $zip = trim($_POST['zip'] ?? '');
-        $pdo->prepare("UPDATE users SET name=?,phone=?,address=?,city=?,zip=? WHERE id=?")->execute([$name,$phone,$address,$city,$zip,$userId]);
+        $pdo->prepare("UPDATE users SET name=?,phone=?,address=?,city=?,zip=?,billing_name=?,billing_company=?,billing_ico=?,billing_dic=?,billing_address=?,billing_city=?,billing_zip=? WHERE id=?")
+            ->execute([$name,$phone,$address,$city,$zip,
+                trim($_POST['billing_name']??''),trim($_POST['billing_company']??''),
+                trim($_POST['billing_ico']??''),trim($_POST['billing_dic']??''),
+                trim($_POST['billing_address']??''),trim($_POST['billing_city']??''),
+                trim($_POST['billing_zip']??''),$userId]);
         $_SESSION['user_name'] = $name;
         $success = t('Profil uložen.', 'Profile saved.');
         $stmt = $pdo->prepare("SELECT * FROM users WHERE id = ?");
@@ -383,12 +388,13 @@ $navItems = [
 
         <!-- PROFIL -->
         <?php elseif ($tab === 'profile'): ?>
-        <div style="background:white;border:1px solid var(--border);border-radius:var(--radius-lg);padding:24px;max-width:600px">
-            <h2 style="font-family:var(--font-display);font-size:1.2rem;font-weight:700;margin-bottom:20px"><?= t('Profil a adresa','Profile & address') ?></h2>
-            <form method="POST">
+        <form method="POST" style="max-width:680px">
+            <!-- Doručovací adresa -->
+            <div style="background:white;border:1px solid var(--border);border-radius:var(--radius-lg);padding:24px;margin-bottom:16px">
+                <h2 style="font-family:var(--font-display);font-size:1.2rem;font-weight:700;margin-bottom:20px">👤 <?= t('Osobní údaje a doručovací adresa','Personal details & delivery address') ?></h2>
                 <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
                     <div class="form-group" style="grid-column:1/-1">
-                        <label class="form-label"><?= t('Jméno a příjmení','Full name') ?></label>
+                        <label class="form-label"><?= t('Jméno a příjmení','Full name') ?> *</label>
                         <input type="text" name="name" class="form-control" value="<?= e($user['name']) ?>" required>
                     </div>
                     <div class="form-group">
@@ -412,9 +418,59 @@ $navItems = [
                         <input type="text" name="zip" class="form-control" value="<?= e($user['zip']??'') ?>">
                     </div>
                 </div>
-                <button type="submit" name="save_profile" class="btn btn-primary"><?= t('Uložit','Save') ?></button>
-            </form>
-        </div>
+            </div>
+
+            <!-- Fakturační adresa -->
+            <div style="background:white;border:1px solid var(--border);border-radius:var(--radius-lg);padding:24px;margin-bottom:16px">
+                <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px">
+                    <h2 style="font-family:var(--font-display);font-size:1.2rem;font-weight:700">🧾 <?= t('Fakturační adresa','Billing address') ?></h2>
+                    <label style="display:flex;align-items:center;gap:8px;font-size:13px;cursor:pointer;margin:0">
+                        <input type="checkbox" id="sameAddress" onchange="toggleBilling(this)"
+                               <?= empty($user['billing_address']) ? 'checked' : '' ?>>
+                        <?= t('Stejná jako doručovací','Same as delivery') ?>
+                    </label>
+                </div>
+                <div id="billingFields" style="<?= empty($user['billing_address']) ? 'display:none' : '' ?>">
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+                        <div class="form-group" style="grid-column:1/-1">
+                            <label class="form-label"><?= t('Jméno / firma','Name / company') ?></label>
+                            <input type="text" name="billing_name" class="form-control" value="<?= e($user['billing_name']??'') ?>">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label"><?= t('Firma','Company') ?></label>
+                            <input type="text" name="billing_company" class="form-control" value="<?= e($user['billing_company']??'') ?>">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">IČO</label>
+                            <input type="text" name="billing_ico" class="form-control" value="<?= e($user['billing_ico']??'') ?>">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">DIČ</label>
+                            <input type="text" name="billing_dic" class="form-control" value="<?= e($user['billing_dic']??'') ?>">
+                        </div>
+                        <div class="form-group" style="grid-column:1/-1">
+                            <label class="form-label"><?= t('Ulice a číslo','Street') ?></label>
+                            <input type="text" name="billing_address" class="form-control" value="<?= e($user['billing_address']??'') ?>">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label"><?= t('Město','City') ?></label>
+                            <input type="text" name="billing_city" class="form-control" value="<?= e($user['billing_city']??'') ?>">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">PSČ</label>
+                            <input type="text" name="billing_zip" class="form-control" value="<?= e($user['billing_zip']??'') ?>">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" name="save_profile" class="btn btn-primary">💾 <?= t('Uložit profil','Save profile') ?></button>
+        </form>
+        <script>
+        function toggleBilling(cb) {
+            document.getElementById('billingFields').style.display = cb.checked ? 'none' : 'block';
+        }
+        </script>
 
         <!-- HESLO -->
         <?php elseif ($tab === 'password'): ?>

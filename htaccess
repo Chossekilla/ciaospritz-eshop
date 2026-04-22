@@ -1,0 +1,9 @@
+RewriteEngine On
+RewriteBase /
+
+# CMS stránky - /stranka/slug → stranka.php?slug=slug
+RewriteRule ^stranka/([a-z0-9-]+)/?$ stranka.php?slug=$1 [L,QSA]
+
+# Trailing slash
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d

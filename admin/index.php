@@ -281,6 +281,7 @@ $role = $_SESSION['staff_role'];
 
         <?php if (canAccess('staff')): ?>
         <div class="nav-section">Nástroje</div>
+        <a href="<?= BASE_URL ?>/admin/pages.php">📄 Stránky (CMS)</a>
         <a href="<?= BASE_URL ?>/admin/emails.php">📧 Email šablony</a>
         <a href="<?= BASE_URL ?>/admin/export.php">📤 XML Export</a>
         <a href="<?= BASE_URL ?>/admin/ai-descriptions.php">🤖 AI Popisy</a>

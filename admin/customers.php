@@ -9,6 +9,30 @@ $message = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $action = $_POST['action'] ?? '';
 
+    if ($action === 'add_customer' && canAccess('staff')) {
+        $name = trim($_POST['new_name'] ?? '');
+        $email = trim($_POST['new_email'] ?? '');
+        $phone = trim($_POST['new_phone'] ?? '');
+        $address = trim($_POST['new_address'] ?? '');
+        $city = trim($_POST['new_city'] ?? '');
+        $zip = trim($_POST['new_zip'] ?? '');
+        $password = $_POST['new_password'] ?? 'CiaoSpritz2024';
+        if ($name && filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $exists = $pdo->prepare("SELECT id FROM users WHERE email=?");
+            $exists->execute([$email]);
+            if ($exists->fetch()) {
+                $message = '❌ Email již existuje.';
+            } else {
+                $pdo->prepare("INSERT INTO users (name,email,password,phone,address,city,zip) VALUES (?,?,?,?,?,?,?)")
+                    ->execute([$name,$email,password_hash($password,PASSWORD_DEFAULT),$phone,$address,$city,$zip]);
+                $message = '✅ Zákazník přidán. Heslo: '.$password;
+                logAction($pdo, 'Přidán zákazník', $email);
+            }
+        } else {
+            $message = '❌ Vyplňte jméno a platný email.';
+        }
+        header('Location: '.BASE_URL.'/admin/customers.php?msg='.urlencode($message)); exit;
+    }
     if ($action === 'send_message' && canAccess('orders')) {
         $orderId = (int)($_POST['order_id'] ?? 0);
         $msg = trim($_POST['message'] ?? '');
@@ -211,6 +235,24 @@ tr.sel{background:rgba(232,99,26,.05)}
 </div>
 
 <?php if(canAccess('staff')): ?>
+<div class="card">
+    <div class="card-header"><h2>➕ Přidat zákazníka</h2></div>
+    <div style="padding:20px">
+        <form method="POST">
+            <input type="hidden" name="action" value="add_customer">
+            <div class="fg"><label>Jméno *</label><input type="text" name="new_name" required placeholder="Jan Novák"></div>
+            <div class="fg"><label>Email *</label><input type="email" name="new_email" required placeholder="jan@example.com"></div>
+            <div class="fg"><label>Telefon</label><input type="tel" name="new_phone" placeholder="777 123 456"></div>
+            <div class="fg"><label>Adresa</label><input type="text" name="new_address" placeholder="Ulice 1"></div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px">
+                <div><label>Město</label><input type="text" name="new_city" placeholder="Praha"></div>
+                <div><label>PSČ</label><input type="text" name="new_zip" placeholder="110 00"></div>
+            </div>
+            <div class="fg"><label>Heslo (výchozí: CiaoSpritz2024)</label><input type="text" name="new_password" placeholder="CiaoSpritz2024"></div>
+            <button type="submit" class="btn btn-primary" style="width:100%">➕ Přidat zákazníka</button>
+        </form>
+    </div>
+</div>
 <div class="card">
     <div class="card-header"><h2>⭐ Přidat body</h2></div>
     <div style="padding:20px">

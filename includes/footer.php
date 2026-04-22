@@ -35,8 +35,14 @@
             <div class="footer-col">
                 <h4><?= t('Informace', 'Information') ?></h4>
                 <ul>
-                    <li><a href="<?= BASE_URL ?>/obchodni-podminky.php"><?= t('Obchodní podmínky', 'Terms & Conditions') ?></a></li>
-                    <li><a href="<?= BASE_URL ?>/gdpr.php"><?= t('Ochrana osobních údajů', 'Privacy Policy') ?></a></li>
+                    <?php
+                    try {
+                        $footerPages = $pdo->query("SELECT slug, title_cs, title_en FROM pages WHERE in_footer=1 AND published=1 ORDER BY sort_order ASC, id ASC")->fetchAll();
+                        foreach ($footerPages as $fp):
+                            $ftitle = LANG==='en' ? ($fp['title_en']?:$fp['title_cs']) : $fp['title_cs'];
+                    ?>
+                    <li><a href="<?= BASE_URL ?>/stranka/<?= htmlspecialchars($fp['slug']) ?>"><?= htmlspecialchars($ftitle) ?></a></li>
+                    <?php endforeach; } catch(Exception $e) {} ?>
                     <li><a href="<?= BASE_URL ?>/kosik.php"><?= t('Košík', 'Cart') ?></a></li>
                     <li><a href="<?= BASE_URL ?>/prihlaseni.php"><?= t('Přihlášení', 'Login') ?></a></li>
                 </ul>
