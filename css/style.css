@@ -2443,3 +2443,17 @@ select.form-control { cursor: pointer; }
         font-size: 0.9rem !important;
     }
 }
+
+/* ==================== KOŠÍK TLAČÍTKO — BÍLÁ IKONA ==================== */
+.add-to-cart {
+    color: white !important;
+    background: var(--green) !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+    padding: 8px 12px !important;
+}
+/* Emoji ikona - odsazení */
+.btn.btn-primary.btn-sm.add-to-cart {
+    color: white !important;
+}
