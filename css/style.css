@@ -2280,180 +2280,200 @@ select.form-control { cursor: pointer; }
     }
 }
 
-/* ==================== OPRAVY PRODUKTOVÝCH KARET ==================== */
 
-/* Bílý podklad obrázku */
-.product-img {
-    background: white !important;
-    padding: 12px;
-}
+/* ==================== MOBILNÍ OPRAVY — FINÁLNÍ ==================== */
 
-/* Obrázek contain - celý produkt viditelný */
-.product-img img {
-    object-fit: contain !important;
-}
-
-/* Pevná výška názvu - karty srovnané */
-.product-name {
-    min-height: 2.6em;
-    display: -webkit-box !important;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-}
-
-/* Popis viditelný na mobilu */
-.product-desc {
-    display: -webkit-box !important;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    min-height: 3em;
-}
-
-/* Tlačítko košíku - bílá ikona + text */
+/* === KOŠÍK TLAČÍTKO — BÍLÁ IKONA, BEZ DUPLIKÁTU === */
 .add-to-cart {
-    display: flex !important;
-    align-items: center;
-    gap: 5px;
-    white-space: nowrap;
-    flex: 1;
-    justify-content: center;
-}
-.add-to-cart::before {
-    content: '🛒';
-    font-size: 14px;
-}
-
-/* Badge - nezakrývá štítek */
-.product-card .badge,
-.product-card [style*="novinka"],
-.product-card [class*="badge"] {
-    top: 8px !important;
-    left: 8px !important;
-    z-index: 2;
-}
-
-/* Flex layout karty - info sekce roste */
-.product-card {
-    display: flex !important;
-    flex-direction: column;
-}
-.product-info {
-    display: flex !important;
-    flex-direction: column;
-    flex: 1;
-}
-.product-footer {
-    margin-top: auto;
-}
-
-/* ==================== OPRAVY HEADER MENU ==================== */
-
-/* Nav přes celý dostupný prostor */
-@media (min-width: 769px) {
-    .header .container {
-        display: flex;
-        align-items: center;
-        width: 100%;
-    }
-    .nav {
-        flex: 1;
-        justify-content: flex-end;
-        margin-left: 0;
-    }
-    .header-actions {
-        flex-shrink: 0;
-    }
-}
-
-/* Mobilní - hamburger ikona černá a viditelná */
-@media (max-width: 768px) {
-    .hamburger {
-        display: flex !important;
-        background: none;
-        border: none;
-        padding: 8px;
-    }
-    .hamburger span {
-        background: var(--black) !important;
-        width: 22px;
-        height: 2px;
-        display: block;
-        border-radius: 2px;
-    }
-    /* Košík ikona s odsazením */
-    .cart-btn {
-        padding: 8px 10px !important;
-        margin-right: 2px;
-    }
-    /* Zakrytí nav na mobilu */
-    .nav:not(.open) {
-        display: none !important;
-    }
-}
-
-/* ==================== FINÁLNÍ OPRAVY KARET ==================== */
-
-/* Badge pozice - nutné position:relative na wrapperu */
-.product-img {
-    position: relative !important;
-}
-
-/* Badge nepřekrývá název - je na obrázku nahoře vlevo */
-.product-img > div[style*="position:absolute"] {
-    top: 8px !important;
-    left: 8px !important;
-    font-size: 10px !important;
-    padding: 2px 8px !important;
-}
-
-/* Popis viditelný i na mobilu */
-@media (max-width: 768px) {
-    .product-desc {
-        display: -webkit-box !important;
-        -webkit-line-clamp: 2 !important;
-        -webkit-box-orient: vertical !important;
-        overflow: hidden !important;
-        font-size: 12px !important;
-        min-height: 2.8em;
-    }
-    /* Košík tlačítko - odsazení ikony */
-    .add-to-cart {
-        padding: 8px 10px !important;
-        font-size: 12px !important;
-        gap: 4px !important;
-    }
-    /* Srovnané výšky karet */
-    .product-card {
-        display: flex !important;
-        flex-direction: column !important;
-    }
-    .product-info {
-        display: flex !important;
-        flex-direction: column !important;
-        flex: 1 !important;
-        padding: 12px !important;
-    }
-    .product-footer {
-        margin-top: auto !important;
-    }
-    .product-name {
-        min-height: 2.6em !important;
-        font-size: 0.9rem !important;
-    }
-}
-
-/* ==================== KOŠÍK TLAČÍTKO — BÍLÁ IKONA ==================== */
-.add-to-cart {
-    color: white !important;
+    color: #ffffff !important;
     background: var(--green) !important;
     display: inline-flex !important;
     align-items: center !important;
+    justify-content: center !important;
     gap: 6px !important;
-    padding: 8px 12px !important;
 }
-/* Emoji ikona - odsazení */
-.btn.btn-primary.btn-sm.add-to-cart {
-    color: white !important;
+.add-to-cart::before {
+    content: none !important;
+    display: none !important;
+}
+.add-to-cart svg,
+.add-to-cart img {
+    filter: brightness(0) invert(1) !important;
+}
+
+/* === PRODUKTOVÉ KARTY — BÍLÝ PODKLAD, SROVNANÉ === */
+.product-img {
+    background: #ffffff !important;
+    padding: 14px !important;
+    position: relative !important;
+}
+.product-img img {
+    object-fit: contain !important;
+    width: 100% !important;
+    height: 100% !important;
+}
+.products-grid .product-card {
+    display: flex !important;
+    flex-direction: column !important;
+}
+.products-grid .product-info {
+    display: flex !important;
+    flex-direction: column !important;
+    flex: 1 !important;
+}
+.products-grid .product-footer {
+    margin-top: auto !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+}
+.products-grid .product-name {
+    min-height: 2.6em !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+}
+.products-grid .product-desc {
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+    min-height: 2.8em !important;
+}
+
+/* === MOBIL — max 768px === */
+@media (max-width: 768px) {
+
+    /* Header — přes celou šířku */
+    .header .container {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        width: 100% !important;
+        padding: 0 16px !important;
+    }
+    .header-actions {
+        display: flex !important;
+        align-items: center !important;
+        gap: 6px !important;
+        flex-shrink: 0 !important;
+    }
+
+    /* Hamburger — viditelný, správné čárky */
+    .hamburger {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 5px !important;
+        background: none !important;
+        border: none !important;
+        padding: 6px !important;
+        cursor: pointer !important;
+    }
+    .hamburger span {
+        display: block !important;
+        width: 22px !important;
+        height: 2px !important;
+        background: #111 !important;
+        border-radius: 2px !important;
+        transition: all .3s !important;
+    }
+
+    /* Košík ikona v headeru — odsazení */
+    .cart-btn {
+        padding: 8px !important;
+        margin-right: 2px !important;
+    }
+
+    /* Produkty — 2 sloupce grid */
+    .products-grid {
+        grid-template-columns: 1fr 1fr !important;
+        gap: 10px !important;
+        padding: 0 12px !important;
+    }
+
+    /* Produktová karta — kompaktní */
+    .product-card {
+        border-radius: 12px !important;
+    }
+    .product-img {
+        aspect-ratio: 1 !important;
+        padding: 10px !important;
+    }
+    .product-info {
+        padding: 10px 12px 12px !important;
+    }
+    .product-name {
+        font-size: 0.85rem !important;
+        min-height: 2.4em !important;
+    }
+    .product-desc {
+        font-size: 11px !important;
+        min-height: 2.6em !important;
+        margin-bottom: 8px !important;
+    }
+    .product-price {
+        font-size: 1.1rem !important;
+    }
+
+    /* Košík tlačítko na mobilu */
+    .add-to-cart {
+        padding: 8px 10px !important;
+        font-size: 12px !important;
+        flex: 1 !important;
+        border-radius: 8px !important;
+    }
+
+    /* Badge pozice */
+    .product-img .badge,
+    .product-img [class*="badge"] {
+        top: 6px !important;
+        left: 6px !important;
+        font-size: 9px !important;
+        padding: 2px 6px !important;
+    }
+
+    /* Nav menu na mobilu */
+    .nav {
+        position: fixed !important;
+        top: 0 !important;
+        right: -100% !important;
+        width: 75% !important;
+        max-width: 300px !important;
+        height: 100vh !important;
+        background: white !important;
+        box-shadow: -4px 0 20px rgba(0,0,0,.15) !important;
+        flex-direction: column !important;
+        padding: 80px 24px 24px !important;
+        transition: right .3s ease !important;
+        z-index: 999 !important;
+        overflow-y: auto !important;
+    }
+    .nav.open {
+        right: 0 !important;
+    }
+    .nav a {
+        padding: 14px 0 !important;
+        border-bottom: 1px solid #f0f0f0 !important;
+        font-size: 1rem !important;
+    }
+}
+
+/* === MOBIL — max 480px === */
+@media (max-width: 480px) {
+    .products-grid {
+        grid-template-columns: 1fr 1fr !important;
+        gap: 8px !important;
+        padding: 0 8px !important;
+    }
+    .product-name {
+        font-size: 0.8rem !important;
+    }
+    .add-to-cart {
+        font-size: 11px !important;
+        padding: 7px 6px !important;
+    }
+    .product-price {
+        font-size: 1rem !important;
+    }
 }
